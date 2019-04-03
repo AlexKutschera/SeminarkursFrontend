@@ -15,6 +15,7 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "SeminarkursFrontend";
     }
+
     @Override
     protected ReactActivityDelegate createReactActivityDelegate() {
       return new ReactActivityDelegate(this, getMainComponentName()) {
