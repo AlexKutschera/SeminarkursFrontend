@@ -9,9 +9,12 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "native-base": "^2.12.1",
     "react": "16.6.3",
     "react-native": "^0.59.1",
     "react-native-camera": "^1.10.2",
+    "react-native-gesture-handler": "^1.1.0",
+    "react-navigation": "^3.6.1",
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
