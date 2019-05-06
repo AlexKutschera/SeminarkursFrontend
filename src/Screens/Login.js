@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 import {
   Container,
-  Header,
-  Left,
-  Body,
-  Right,
   Button,
-  Title,
   Text,
-  Icon,
   Card,
-  CardItem,
   Form,
   Item,
   Input,
   Content,
+  Icon,
 } from 'native-base';
-import { DefaultHeader, DefaultFooter } from '../Components';
+import { DefaultHeader } from '../Components';
 
 class Login extends Component {
   static navigationOptions = {
     title: 'Login',
+    tabBarIcon: <Icon name="person" />,
   };
 
   render() {

@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Button,
-  Title,
-  Text,
-  Icon,
-  Content,
-  Grid,
-  Col,
-} from 'native-base';
-import { DefaultHeader, DefaultFooter } from '../Components';
+import { Container } from 'native-base';
+import { DefaultHeader } from '../Components';
+
+//  TODO Suchscreen Innenleben
 
 class Suche extends Component {
   static navigationOptions = {

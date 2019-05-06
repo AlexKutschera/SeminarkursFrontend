@@ -1,18 +1,34 @@
 import React, { Component } from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { Home, Scanner, Login, Hilfe, Suche } from './Screens/Index';
+import {
+  createStackNavigator,
+  createAppContainer,
+  createMaterialTopTabNavigator,
+} from 'react-navigation';
+import { AppRegistry, YellowBox } from 'react-native';
+import { Scanner, Login, Hilfe, Suche } from './Screens/Index';
+// TODO Entfernen vor Release
+YellowBox.ignoreWarnings([
+  'Unrecognized WebSocket',
+  'Remote debugger',
+  'Warning: ViewPager',
+]);
+// TODO react-native-pdf
+// TODO socketio in eigene File
 
-const AppNavigator = createStackNavigator(
+const AppNavigator = createMaterialTopTabNavigator(
   {
-    Home,
-    Scanner,
     Login,
+    Scanner,
     Hilfe,
-    Suche,
   },
   {
-    initialRouteName: 'Home',
-    headerMode: 'none',
+    initialRouteName: 'Scanner',
+    swipeEnabled: true,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      showLabel: false,
+      showIcon: true,
+    },
   }
 );
 

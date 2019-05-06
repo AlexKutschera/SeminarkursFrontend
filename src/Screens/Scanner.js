@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Button,
-  Title,
-  Icon,
-  Content,
-} from 'native-base';
+import { Container, Icon } from 'native-base';
 import { RNCamera } from 'react-native-camera';
-import { View, Text } from 'react-native';
 import io from 'socket.io-client/dist/socket.io';
-import { DefaultHeader, DefaultFooter } from '../Components';
-
+import { DefaultHeader } from '../Components';
+// TODO Flashmode Button
+// TODO Permission Prompt
 type Props = {};
 class Scanner extends Component<Props> {
   static navigationOptions = {
     title: 'Scanner',
+    tabBarIcon: <Icon name="barcode" />,
   };
 
   socket = null;
 
+  state = {
+    code: '',
+    codeData: {},
+  };
+
   componentDidMount() {
-    this.socket = io('https://socketio-chat-example.now.sh/', {
+    this.socket = io('https://seminarkurs.alexkutschera.de/', {
       transports: ['websocket'],
       upgrade: false,
       rejectUnauthorized: null,
@@ -46,11 +42,6 @@ class Scanner extends Component<Props> {
     console.log(this.socket);
   }
 
-  state = {
-    code: '',
-    codeData: {},
-  };
-
   loadItemData(code) {
     if (code !== this.state.code) {
       console.log(code);
@@ -67,6 +58,7 @@ class Scanner extends Component<Props> {
       <Container>
         <DefaultHeader title="Scanner" navigation={this.props.navigation} />
         <RNCamera
+          flashMode={RNCamera.Constants.FlashMode.off}
           ref={ref => {
             this.camera = ref;
           }}
@@ -76,7 +68,6 @@ class Scanner extends Component<Props> {
           onBarCodeRead={data => this.loadItemData(data.data)}
           captureAudio={false}
         />
-        <DefaultFooter navigation={this.props.navigation} />
       </Container>
     );
   }

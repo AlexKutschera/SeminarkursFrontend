@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Button,
-  Title,
-  Text,
-  Icon,
-} from 'native-base';
+import { Header, Left, Body, Right, Button, Title, Icon } from 'native-base';
 
 class DefaultHeader extends Component {
   render() {

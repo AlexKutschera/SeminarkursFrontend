@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import {
   Container,
-  Header,
-  Left,
-  Body,
-  Right,
   Button,
   Title,
   Text,
-  Icon,
   Content,
   Grid,
   Col,
-  Row
+  Row,
+  Icon,
 } from 'native-base';
 import { StyleSheet, View } from 'react-native';
-import { DefaultHeader, DefaultFooter } from '../Components';
+import { DefaultHeader } from '../Components';
 
 class Hilfe extends Component {
   static navigationOptions = {
     title: 'Hilfe',
+    tabBarIcon: <Icon name="md-help-circle" />,
   };
 
   render() {
