@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {
-  createStackNavigator,
-  createAppContainer,
-  createMaterialTopTabNavigator,
-} from 'react-navigation';
-import { AppRegistry, YellowBox } from 'react-native';
+import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { YellowBox } from 'react-native';
+import Icon from 'react-native-ionicons';
 import { Scanner, Login, Hilfe, Suche } from './Screens/Index';
+import { ScannerButton } from './Components/index';
+import color from './Styles/Color';
 // TODO Entfernen vor Release
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket',
@@ -15,19 +14,42 @@ YellowBox.ignoreWarnings([
 // TODO react-native-pdf
 // TODO socketio in eigene File
 
-const AppNavigator = createMaterialTopTabNavigator(
+const AppNavigator = createBottomTabNavigator(
   {
-    Login,
-    Scanner,
-    Hilfe,
+    Login: {
+      screen: Login,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="person" color={tintColor} size={32} />
+        ),
+      }),
+    },
+    Scanner: {
+      screen: Scanner,
+      navigationOptions: () => ({
+        tabBarIcon: <ScannerButton />,
+      }),
+    },
+    Hilfe: {
+      screen: Login,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="help-circle-outline" color={tintColor} size={32} />
+        ),
+      }),
+    },
   },
   {
-    initialRouteName: 'Scanner',
-    swipeEnabled: true,
-    tabBarPosition: 'bottom',
     tabBarOptions: {
-      showLabel: false,
-      showIcon: true,
+      initialRouteName: 'Scanner',
+      showLabel: false, // hide labels
+      activeTintColor: color.blue05, // active icon color
+      inactiveTintColor: color.gray08, // inactive icon color
+      style: {
+        backgroundColor: color.white, // TabBar background
+        height: 48,
+        elevation: 4,
+      },
     },
   }
 );

@@ -16,7 +16,6 @@ import { DefaultHeader } from '../Components';
 class Hilfe extends Component {
   static navigationOptions = {
     title: 'Hilfe',
-    tabBarIcon: <Icon name="md-help-circle" />,
   };
 
   render() {

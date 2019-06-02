@@ -60,6 +60,7 @@
 		E6D6FB1BCA63427DA975621A /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C11D93DEB8040F1A18CDFE1 /* libRNCamera.a */; };
 		C8B7E2F7A47E436090FD927A /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DFFBB800344818B033DA04 /* libRNGestureHandler.a */; };
 		CC7AE8FBD9CC456399A651D8 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 398386F57D9E4E8DA9CE20AC /* libRNGestureHandler-tvOS.a */; };
+		395540600DA5486EA229E56D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50ADC7535CA347158F62A63B /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,6 +391,7 @@
 		917BC0C3188E4B09A9D731A9 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		08DFFBB800344818B033DA04 /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		398386F57D9E4E8DA9CE20AC /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; name = "libRNGestureHandler-tvOS.a"; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		50ADC7535CA347158F62A63B /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-ionicons/fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -681,6 +683,7 @@
 				69862D9964A4459BAC0EDA01 /* rubicon-icon-font.ttf */,
 				4AB7303FBD594CD4AF9637A9 /* SimpleLineIcons.ttf */,
 				DB96A435C6BF41299DA0CE92 /* Zocial.ttf */,
+				50ADC7535CA347158F62A63B /* Ionicons.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1150,6 +1153,7 @@
 				019CF6B751A441479E1BEBB1 /* rubicon-icon-font.ttf in Resources */,
 				385A87299A2748829605CD71 /* SimpleLineIcons.ttf in Resources */,
 				281D7E212CD843C49FAB6E99 /* Zocial.ttf in Resources */,
+				395540600DA5486EA229E56D /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
