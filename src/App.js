@@ -24,10 +24,11 @@ const AppNavigator = createBottomTabNavigator(
         ),
       }),
     },
+    // TODO Komplete fläche klickbar (eigenen TabBarComponent)
     Scanner: {
       screen: Scanner,
       navigationOptions: () => ({
-        tabBarIcon: <ScannerButton />,
+        tabBarIcon: props => <ScannerButton {...props} />,
       }),
     },
     Hilfe: {

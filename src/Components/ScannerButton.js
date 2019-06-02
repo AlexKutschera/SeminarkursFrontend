@@ -7,6 +7,7 @@ const SIZE = 64;
 
 class ScannerButton extends Component {
   render() {
+    const { navigation, onTabPress } = this.props;
     return (
       <Container>
         <Icon name="qr-scanner" color={color.blue08} size={32} />
