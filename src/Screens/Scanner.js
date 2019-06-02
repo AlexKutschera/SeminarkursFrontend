@@ -9,7 +9,6 @@ type Props = {};
 class Scanner extends Component<Props> {
   static navigationOptions = {
     title: 'Scanner',
-    tabBarIcon: <Icon name="barcode" />,
   };
 
   socket = null;
