@@ -8,9 +8,16 @@ import {
   Item,
   Input,
   Content,
-  Icon,
+  Header,
+  Left,
+  Body,
+  Right,
+  Label,
 } from 'native-base';
+import styled from 'styled-components';
+import Icon from 'react-native-ionicons';
 import { DefaultHeader } from '../Components';
+import color from '../Styles/Color';
 
 class Login extends Component {
   static navigationOptions = {
@@ -20,24 +27,40 @@ class Login extends Component {
 
   render() {
     return (
-      <Container>
-        <DefaultHeader title="Login" navigation={this.props.navigation} />
+      <Container style={{ backgroundColor: color.gray10 }}>
+        <StyledHeader style={{ backgroundColor: color.blue04 }}>
+          <StyledLeft>
+            <Button
+              iconLeft
+              transparent
+              onPress={() => this.props.navigation.goBack()}
+            >
+              <Icon name="arrow-back" color={color.white} />
+            </Button>
+          </StyledLeft>
+          <Body>
+            <StyledTitle>{`Willkommen\nzurück`}</StyledTitle>
+          </Body>
+          <Right />
+        </StyledHeader>
         <Content>
-          <Card style={{ flex: 1 }}>
+          <LoginForm style={{ flex: 1 }}>
             <Form>
-              <Item>
-                <Input placeholder="Username" />
+              <Item stackedLabel>
+                <Label>E-Mail</Label>
+                <Input placeholder="E-Mail eingeben" />
               </Item>
-              <Item>
-                <Input placeholder="Password" />
+              <Item stackedLabel>
+                <Label>Passwort</Label>
+                <Input placeholder="Passwort eingeben" />
               </Item>
               <Item last>
-                <Button style={{ flex: 1 }}>
-                  <Text>Login</Text>
-                </Button>
+                <StyledButton>
+                  <ButtonText>Login</ButtonText>
+                </StyledButton>
               </Item>
             </Form>
-          </Card>
+          </LoginForm>
         </Content>
       </Container>
     );
@@ -45,3 +68,37 @@ class Login extends Component {
 }
 
 export { Login };
+
+const StyledTitle = styled.Text`
+  font-size: 34;
+  line-height: 40;
+  width: 200;
+  margin-left: 18;
+  color: ${color.gray10};
+`;
+const StyledHeader = styled(Header)`
+  height: 280;
+`;
+const StyledLeft = styled(Left)`
+  position: absolute;
+  left: 12;
+  top: 12;
+`;
+const LoginForm = styled.View`
+  padding-left: 32;
+  padding-right: 32;
+`;
+const StyledButton = styled(Button)`
+  background-color: ${color.blue06};
+  height: 32;
+  border-radius: 2;
+  padding-left: 12;
+  padding-right: 12;
+`;
+const ButtonText = styled(Text)`
+  font-size: 14;
+  font-weight: bold;
+  line-height: 16;
+  letter-spacing: 1.35;
+  text-transform: uppercase;
+`;

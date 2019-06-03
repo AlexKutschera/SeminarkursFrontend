@@ -32,7 +32,7 @@ const AppNavigator = createBottomTabNavigator(
       }),
     },
     Hilfe: {
-      screen: Login,
+      screen: Hilfe,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <Icon name="help-circle-outline" color={tintColor} size={32} />

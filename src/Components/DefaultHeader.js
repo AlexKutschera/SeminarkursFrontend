@@ -13,7 +13,7 @@ class DefaultHeader extends Component {
             transparent
             onPress={() => this.props.navigation.goBack()}
           >
-            <Icon name="arrow-round-back" />
+            <Icon name="arrow-back" color={color.white} />
           </Button>
         </Left>
         <Body>
