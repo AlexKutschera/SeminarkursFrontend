@@ -8,10 +8,13 @@ import {
   Item,
   Text,
   Input,
+  Content,
 } from 'native-base';
 import Icon from 'react-native-ionicons';
 import styled from 'styled-components';
+import { ScrollView } from 'react-native-gesture-handler';
 import color from '../Styles/Color';
+import { SearchResults } from '../Components/SearchResult';
 
 //  TODO Suchscreen Innenleben
 
@@ -21,6 +24,16 @@ class Suche extends Component {
   };
 
   render() {
+    const rows = [];
+    for (let i = 0; i < 14; i++) {
+      rows.push(
+        <SearchResults
+          title="Endrohr"
+          image={require('../../assets/Endrohr.jpg')}
+          key={i}
+        />
+      );
+    }
     return (
       <Container>
         <SearchHeader searchBar>
@@ -35,6 +48,7 @@ class Suche extends Component {
             <SearchInput placeholder="Search" />
           </SearchBar>
         </SearchHeader>
+        <SearchContent>{rows}</SearchContent>
       </Container>
     );
   }
@@ -60,3 +74,4 @@ const SearchInput = styled(Input)`
   border-bottom-width: 1;
   border-bottom-color: ${color.blue09};
 `;
+const SearchContent = styled.ScrollView``;
