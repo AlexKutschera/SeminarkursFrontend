@@ -39,6 +39,14 @@ const AppNavigator = createBottomTabNavigator(
         ),
       }),
     },
+    Suche: {
+      screen: Suche,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="search" color={tintColor} size={32} />
+        ),
+      }),
+    },
   },
   {
     tabBarOptions: {

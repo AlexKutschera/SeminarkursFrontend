@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Container } from 'native-base';
+import { Container, Button } from 'native-base';
 import { RNCamera } from 'react-native-camera';
 import io from 'socket.io-client/dist/socket.io';
 import styled from 'styled-components';
 import Icon from 'react-native-ionicons';
 import { Dimensions } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+
 // TODO Flashmode Button
 // TODO Permission Prompt
 type Props = {};
