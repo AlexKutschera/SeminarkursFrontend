@@ -16,6 +16,7 @@ import {
 } from 'native-base';
 import styled from 'styled-components';
 import Icon from 'react-native-ionicons';
+import { AsyncStorage } from 'react-native';
 import { DefaultHeader } from '../Components';
 import color from '../Styles/Color';
 
@@ -23,6 +24,11 @@ class Login extends Component {
   static navigationOptions = {
     title: 'Login',
     tabBarIcon: <Icon name="person" />,
+  };
+
+  _signInAsync = async () => {
+    await AsyncStorage.setItem('userToken', 'abc');
+    this.props.navigation.navigate('Profile');
   };
 
   render() {
@@ -55,7 +61,7 @@ class Login extends Component {
                 <Input placeholder="Passwort eingeben" />
               </Item>
               <Item last>
-                <StyledButton>
+                <StyledButton onPress={this._signInAsync}>
                   <ButtonText>Login</ButtonText>
                 </StyledButton>
               </Item>

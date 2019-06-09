@@ -5,7 +5,6 @@ import io from 'socket.io-client/dist/socket.io';
 import styled from 'styled-components';
 import Icon from 'react-native-ionicons';
 import { Dimensions } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 // TODO Flashmode Button
 // TODO Permission Prompt
@@ -45,6 +44,10 @@ class Scanner extends Component<Props> {
     console.log(this.socket);
   }
 
+  _showSuche = () => {
+    this.props.navigation.navigate('Suche');
+  };
+
   loadItemData(code) {
     if (code !== this.state.code) {
       console.log(code);
@@ -71,7 +74,9 @@ class Scanner extends Component<Props> {
           captureAudio={false}
         />
         <Toolbar>
-          <StyledIcon name="search" />
+          <Button onPress={this._showSuche}>
+            <StyledIcon name="search" />
+          </Button>
           <StyledIcon name="flash-off" />
         </Toolbar>
       </Container>
