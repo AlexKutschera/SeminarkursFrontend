@@ -9,7 +9,7 @@ class ScannerButton extends Component {
   render() {
     return (
       <Container>
-        <Icon name="rocket" color={color.blue08} size={32} />
+        <Icon name="qr-scanner" color={color.blue08} size={32} />
       </Container>
     );
   }

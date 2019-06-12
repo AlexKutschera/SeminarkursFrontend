@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Icon from 'react-native-ionicons';
 import styled from 'styled-components';
 import color from '../Styles/Color';
 

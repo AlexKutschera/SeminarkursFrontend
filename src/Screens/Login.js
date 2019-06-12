@@ -50,22 +50,20 @@ class Login extends Component {
           <Right />
         </StyledHeader>
         <Content>
-          <LoginForm style={{ flex: 1 }}>
-            <Form>
-              <Item stackedLabel>
-                <Label>E-Mail</Label>
-                <Input placeholder="E-Mail eingeben" />
-              </Item>
-              <Item stackedLabel>
-                <Label>Passwort</Label>
-                <Input placeholder="Passwort eingeben" />
-              </Item>
-              <Item last>
-                <StyledButton onPress={this._signInAsync}>
-                  <ButtonText>Login</ButtonText>
-                </StyledButton>
-              </Item>
-            </Form>
+          <LoginForm>
+            <StyledItem>
+              <StyledLabel>E-Mail</StyledLabel>
+              <StyledInput placeholder="E-Mail eingeben" />
+            </StyledItem>
+            <StyledItem>
+              <StyledLabel>Passwort</StyledLabel>
+              <StyledInput placeholder="Passwort eingeben" />
+            </StyledItem>
+            <StyledItem>
+              <StyledButton onPress={this._signInAsync}>
+                <ButtonText>Login</ButtonText>
+              </StyledButton>
+            </StyledItem>
           </LoginForm>
         </Content>
       </Container>
@@ -74,6 +72,26 @@ class Login extends Component {
 }
 
 export { Login };
+
+const StyledItem = styled.View`
+  border-bottom-width: 0;
+  margin-right: 8;
+  margin-bottom: 12;
+`;
+
+const StyledLabel = styled(Label)`
+  font-size: 14;
+  font-weight: bold;
+  line-height: 24;
+  color: ${color.gray03};
+`;
+
+const StyledInput = styled(Input)`
+  border-bottom-color: ${color.blue09};
+  border-bottom-width: 1;
+  color: ${color.blue09};
+  margin-right: 8;
+`;
 
 const StyledTitle = styled.Text`
   font-size: 34;
@@ -90,16 +108,19 @@ const StyledLeft = styled(Left)`
   left: 12;
   top: 12;
 `;
-const LoginForm = styled.View`
-  padding-left: 32;
-  padding-right: 32;
+const LoginForm = styled(Form)`
+  flex: 1;
+  margin-left: 32;
+  margin-right: 32;
+  margin-top: 32;
 `;
 const StyledButton = styled(Button)`
   background-color: ${color.blue06};
-  height: 32;
+  height: 36;
   border-radius: 2;
   padding-left: 12;
   padding-right: 12;
+  margin-top: 20;
 `;
 const ButtonText = styled(Text)`
   font-size: 14;
