@@ -8,7 +8,7 @@ import Icon from 'react-native-ionicons';
 import {
   Scanner,
   Login,
-  Hilfe,
+  Chat,
   Suche,
   Profile,
   AuthLoadingScreen,
@@ -39,8 +39,8 @@ const TabNavigator = createBottomTabNavigator(
         tabBarIcon: props => <ScannerButton {...props} />,
       }),
     },
-    Hilfe: {
-      screen: Hilfe,
+    Chat: {
+      screen: Chat,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <Icon name="help-circle-outline" color={tintColor} size={32} />

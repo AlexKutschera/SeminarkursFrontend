@@ -5,6 +5,7 @@ import io from 'socket.io-client/dist/socket.io';
 import styled from 'styled-components';
 import Icon from 'react-native-ionicons';
 import { Dimensions } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // TODO Flashmode Button
 // TODO Permission Prompt
@@ -74,10 +75,12 @@ class Scanner extends Component<Props> {
           captureAudio={false}
         />
         <Toolbar>
-          <Button onPress={this._showSuche}>
+          <SearchButton onPress={this._showSuche}>
             <StyledIcon name="search" />
-          </Button>
-          <StyledIcon name="flash-off" />
+          </SearchButton>
+          <SearchButton>
+            <StyledIcon name="flash-off" />
+          </SearchButton>
         </Toolbar>
       </Container>
     );
@@ -86,19 +89,11 @@ class Scanner extends Component<Props> {
 
 export { Scanner };
 
-const Overlay = styled.View`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background-color: blue;
-  opacity: 1;
-`;
 const Toolbar = styled.View`
-  position: absolute;
   width: ${Dimensions.get('window').width};
+  position: absolute;
   left: 0;
-  top: 24;
+  top: 32;
   height: 32;
   flex: 1;
   flex-direction: row;
@@ -107,10 +102,17 @@ const Toolbar = styled.View`
 `;
 
 const StyledIcon = styled(Icon)`
+  text-align: center;
+  text-align-vertical: center;
+`;
+const SearchButton = styled.TouchableOpacity`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  border-radius: 42;
+  background-color: rgba(255, 255, 255, 0.25);
+  max-width: 42;
+  height: 42;
   margin-left: 24;
   margin-right: 24;
-  border-radius: 50;
-  width: 32;
-  height: 32;
-  text-align: center;
 `;
