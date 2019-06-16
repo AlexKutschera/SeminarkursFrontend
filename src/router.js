@@ -12,6 +12,7 @@ import {
   Suche,
   Profile,
   AuthLoadingScreen,
+  Product,
 } from './Screens/Index';
 import color from './Styles/Color';
 import { ScannerButton } from './Components/index';
@@ -66,7 +67,7 @@ const TabNavigator = createBottomTabNavigator(
 export const AppNavigator = createStackNavigator(
   {
     Suche,
-    /*  Product, */
+    Product,
     TabNavigator,
   },
   { initialRouteName: 'TabNavigator', headerMode: 'none' }

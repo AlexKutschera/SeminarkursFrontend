@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import Icon from 'react-native-ionicons';
 import styled from 'styled-components';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import color from '../Styles/Color';
 import { SearchResults } from '../Components/SearchResult';
 
@@ -23,15 +23,20 @@ class Suche extends Component {
     title: 'Suche',
   };
 
+  _showProduct = () => {
+    this.props.navigation.navigate('Product');
+  };
+
   render() {
     const rows = [];
     for (let i = 0; i < 14; i++) {
       rows.push(
-        <SearchResults
-          title="Endrohr"
-          image={require('../../assets/Endrohr.jpg')}
-          key={i}
-        />
+        <TouchableOpacity onPress={this._showProduct} key={i}>
+          <SearchResults
+            title="Endrohr"
+            image={require('../../assets/Endrohr.jpg')}
+          />
+        </TouchableOpacity>
       );
     }
     return (

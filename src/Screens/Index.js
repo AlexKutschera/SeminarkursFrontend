@@ -4,3 +4,4 @@ export * from './Chat';
 export * from './Suche';
 export * from './Profile';
 export * from './AuthLoadingScreen';
+export * from './Product';

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { TouchableOpacity } from 'react-native';
 import color from '../Styles/Color';
 
 class SearchResults extends Component {
