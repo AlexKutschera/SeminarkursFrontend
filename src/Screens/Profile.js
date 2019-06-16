@@ -31,7 +31,7 @@ class Profile extends Component {
         </StyledHeader>
         <StyledBody>
           <ProfileCard>
-            <Avatar source={require('../../assets/Endrohr.jpg')} />
+            <Avatar source={require('../../assets/Avatar.jpg')} />
             <Name>Johanna Wu</Name>
             <Abteilung>Support Boyscan</Abteilung>
           </ProfileCard>

@@ -29,7 +29,7 @@ class Chat extends Component {
           </MessageReceived>
         </ChatContent>
         <ChatBar>
-          <Avatar source={require('../../assets/Endrohr.jpg')} />
+          <Avatar source={require('../../assets/Avatar.jpg')} />
           <MessageInput placeholder="Nachricht eingeben" />
           <SendButton iconLeft>
             <SendIcon name="send" size={24} />

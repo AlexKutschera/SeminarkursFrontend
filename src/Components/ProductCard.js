@@ -6,11 +6,12 @@ import color from '../Styles/Color';
 class ProductCard extends Component {
   constructor(props) {
     super(props);
-
+    // Name of the Icons which change on Expand/Collapse
     this.icons = {
       up: 'ios-arrow-up',
       down: 'ios-arrow-down',
     };
+    // Text of the Expand/collapse Button
     this.collapseText = {
       collapsed: 'Mehr',
       expanded: 'Weniger',
@@ -18,13 +19,13 @@ class ProductCard extends Component {
 
     this.state = {
       isExpanded: false,
-      isModal: this.props.modal,
+      isModal: this.props.modal, // for use in the Scanner PopUp
     };
   }
 
   toggleHidden() {
     this.setState({
-      isExpanded: !this.state.isExpanded,
+      isExpanded: !this.state.isExpanded, // Invert isExpanded
     });
   }
 
@@ -33,6 +34,7 @@ class ProductCard extends Component {
     let icon = this.icons.down;
 
     if (this.state.isExpanded) {
+      // change Icon & Text based on state
       collapse = this.collapseText.expanded;
       icon = this.icons.up;
     }
