@@ -39,10 +39,8 @@ class ProductCard extends Component {
       icon = this.icons.up;
     }
     return (
-      <Card>
-        {this.state.isModal ? (
-          <Handle />
-        ) : (
+      <Card modalStyle={this.state.isModal}>
+        {!this.state.isModal && (
           <OpenPDF
             onPress={console.log('PDF öffnen') /* Hier Link zum PDF öffnen */}
           >
@@ -149,16 +147,18 @@ class ProductCard extends Component {
 }
 
 export { ProductCard };
-
 const Card = styled.View`
+  background-color: ${color.white};
+  border-radius: 12;
   margin-left: 16;
   margin-right: 16;
-  margin-top: 16;
-  background-color: ${color.white};
+  margin-top: ${props => (props.modalStyle ? '0' : '16')};
+  elevation: ${props => (props.modalStyle ? '0' : '16')};
   padding-left: 24;
   padding-right: 24;
-  border-radius: 12;
-  elevation: 1;
+  min-height: ${props => (props.modalStyle ? '200' : '0')};
+  padding-bottom: ${props => (props.modalStyle ? '40' : '0')};
+  padding-top: ${props => (props.modalStyle ? '40' : '0')};
 `;
 
 const OpenPDF = styled.TouchableOpacity`
@@ -167,15 +167,6 @@ const OpenPDF = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-top: 12;
-`;
-const Handle = styled.View`
-  width: 48;
-  height: 4;
-  border-radius: 2;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 12;
-  background-color: ${color.gray09};
 `;
 
 const PDFLinkText = styled.Text`

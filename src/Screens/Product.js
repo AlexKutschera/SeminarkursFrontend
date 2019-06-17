@@ -15,10 +15,6 @@ class Product extends Component {
     return (
       <Container>
         <ScrollView>
-          <TopBar>
-            <TopText>Details</TopText>
-            <Icon name="ios-arrow-down" color={color.gray07} size={20} />
-          </TopBar>
           <ProductCard
             modal={false}
             name="Endrohr"
@@ -33,7 +29,6 @@ class Product extends Component {
             gewicht="550g"
             zulieferer="Alu BW"
             letzterScan="19.06.19 18:55"
-            updateTextCB={this.updateText1}
           />
           <CommentSection>
             <Header>
@@ -70,21 +65,6 @@ class Product extends Component {
 
 export { Product };
 
-const TopBar = styled.View`
-  margin-top: 16;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
-`;
-
-const TopText = styled.Text`
-  font-size: 14;
-  letter-spacing: 1.35;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: ${color.gray06};
-  margin-bottom: -4;
-`;
 const Container = styled.View`
   background-color: ${color.gray09};
   flex: 1;

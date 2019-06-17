@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Button } from 'native-base';
+import { Container, Button, Text } from 'native-base';
 import { RNCamera } from 'react-native-camera';
 import io from 'socket.io-client/dist/socket.io';
 import styled from 'styled-components';
 import Icon from 'react-native-ionicons';
 import { Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import SwipeUpDown from 'react-native-swipe-up-down';
+import { Product } from './Product';
+import { ProductCard, ProductSheet } from '../Components';
 
 // TODO Flashmode Button
 // TODO Permission Prompt
@@ -17,10 +20,14 @@ class Scanner extends Component<Props> {
 
   socket = null;
 
-  state = {
-    code: '',
-    codeData: {},
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      code: '',
+      codeData: {},
+      isRead: false,
+    };
+  }
 
   componentDidMount() {
     this.socket = io('https://seminarkurs.alexkutschera.de/', {
@@ -50,6 +57,9 @@ class Scanner extends Component<Props> {
   };
 
   loadItemData(code) {
+    this.setState({
+      isRead: true, // Invert isRead
+    });
     if (code !== this.state.code) {
       console.log(code);
       console.log(this.socket.connected);
@@ -61,6 +71,11 @@ class Scanner extends Component<Props> {
   }
 
   render() {
+    setTimeout(() => {
+      this.setState({
+        isRead: true, // Invert isRead
+      });
+    }, 3000);
     return (
       <Container>
         <RNCamera
@@ -82,6 +97,7 @@ class Scanner extends Component<Props> {
             <StyledIcon name="flash-off" />
           </SearchButton>
         </Toolbar>
+        {this.state.isRead && <Popup />}
       </Container>
     );
   }
@@ -89,6 +105,14 @@ class Scanner extends Component<Props> {
 
 export { Scanner };
 
+const Popup = styled(ProductSheet)`
+  width: ${Dimensions.get('window').width};
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  height: 200;
+`;
 const Toolbar = styled.View`
   width: ${Dimensions.get('window').width};
   position: absolute;
