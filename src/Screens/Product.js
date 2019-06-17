@@ -10,6 +10,13 @@ class Product extends Component {
     title: 'Product',
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModal: this.props.modal, // for use in the Scanner PopUp
+    };
+  }
+
   // TODO Rerender Comments on change of ProductCard
   render() {
     return (
@@ -30,33 +37,35 @@ class Product extends Component {
             zulieferer="Alu BW"
             letzterScan="19.06.19 18:55"
           />
-          <CommentSection>
-            <Header>
-              <Title>Kommentare</Title>
-              <CommentCount>2</CommentCount>
-            </Header>
-            <ChatBar>
-              <Avatar source={require('../../assets/Avatar.jpg')} />
-              <MessageInput placeholder="Kommentar hinzufügen" />
-              <SendButton>
-                <SendIcon name="send" size={24} />
-              </SendButton>
-            </ChatBar>
-            <Comment
-              name="Wyatt Morris"
-              abteilung="Student IT"
-              date="09.04.19 12:45"
-              text="Das Foto ist nicht mehr up-to-date"
-              replies={[
-                {
-                  name: 'Johanna Wu',
-                  abteilung: 'Student IT',
-                  date: '09.04.19 12:45',
-                  text: 'Das Foto ist nicht mehr up-to-date',
-                },
-              ]}
-            />
-          </CommentSection>
+          {this.state.isModal && (
+            <CommentSection>
+              <Header>
+                <Title>Kommentare</Title>
+                <CommentCount>2</CommentCount>
+              </Header>
+              <ChatBar>
+                <Avatar source={require('../../assets/Avatar.jpg')} />
+                <MessageInput placeholder="Kommentar hinzufügen" />
+                <SendButton>
+                  <SendIcon name="send" size={24} />
+                </SendButton>
+              </ChatBar>
+              <Comment
+                name="Wyatt Morris"
+                abteilung="Student IT"
+                date="09.04.19 12:45"
+                text="Das Foto ist nicht mehr up-to-date"
+                replies={[
+                  {
+                    name: 'Johanna Wu',
+                    abteilung: 'Student IT',
+                    date: '09.04.19 12:45',
+                    text: 'Das Foto ist nicht mehr up-to-date',
+                  },
+                ]}
+              />
+            </CommentSection>
+          )}
         </ScrollView>
       </Container>
     );

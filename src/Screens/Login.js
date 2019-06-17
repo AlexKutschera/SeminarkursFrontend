@@ -55,7 +55,10 @@ class Login extends Component {
             </StyledItem>
             <StyledItem>
               <StyledLabel>Passwort</StyledLabel>
-              <StyledInput placeholder="Passwort eingeben" />
+              <StyledInput
+                secureTextEntry={true}
+                placeholder="Passwort eingeben"
+              />
             </StyledItem>
             <StyledItem>
               <StyledButton onPress={this._signInAsync}>
