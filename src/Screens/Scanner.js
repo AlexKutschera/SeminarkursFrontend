@@ -22,10 +22,11 @@ class Scanner extends Component<Props> {
 
   constructor(props) {
     super(props);
+    this.handleIsRead = this.handleIsRead.bind(this);
     this.state = {
       code: '',
       codeData: {},
-      isRead: false,
+      isRead: true,
     };
   }
 
@@ -56,6 +57,10 @@ class Scanner extends Component<Props> {
     this.props.navigation.navigate('Suche');
   };
 
+  handleIsRead(value) {
+    this.setState({ isRead: value });
+  }
+
   loadItemData(code) {
     this.setState({
       isRead: true, // Invert isRead
@@ -71,11 +76,6 @@ class Scanner extends Component<Props> {
   }
 
   render() {
-    setTimeout(() => {
-      this.setState({
-        isRead: true, // Invert isRead
-      });
-    }, 3000);
     return (
       <Container>
         <RNCamera
@@ -97,7 +97,7 @@ class Scanner extends Component<Props> {
             <StyledIcon name="flash-off" />
           </SearchButton>
         </Toolbar>
-        {this.state.isRead && <Popup />}
+        {this.state.isRead && <Popup handleIsRead={this.handleIsRead} />}
       </Container>
     );
   }

@@ -19,9 +19,10 @@ class Product extends Component {
 
   // TODO Rerender Comments on change of ProductCard
   render() {
+    const marginModal = this.state.isModal ? 0 : 16;
     return (
       <Container>
-        <ScrollView>
+        <ScrollView style={{ paddingTop: marginModal }}>
           <ProductCard
             modal={false}
             name="Endrohr"

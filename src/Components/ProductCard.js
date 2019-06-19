@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-ionicons';
+import { View } from 'native-base';
 import color from '../Styles/Color';
 
 class ProductCard extends Component {
@@ -40,13 +41,25 @@ class ProductCard extends Component {
     }
     return (
       <Card modalStyle={this.state.isModal}>
-        {!this.state.isModal && (
+        {!this.state.isModal ? (
           <OpenPDF
             onPress={console.log('PDF öffnen') /* Hier Link zum PDF öffnen */}
           >
             <PDFLinkText>Datenblatt</PDFLinkText>
             <Icon name="open" color={color.gray08} size={16} />
           </OpenPDF>
+        ) : (
+          <View
+            style={{
+              backgroundColor: color.gray09,
+              width: 48,
+              height: 4,
+              alignSelf: 'center',
+              marginTop: 2,
+              marginBottom: 16,
+              borderRadius: 4,
+            }}
+          />
         )}
 
         <Header>
@@ -152,13 +165,11 @@ const Card = styled.View`
   border-radius: 12;
   margin-left: 16;
   margin-right: 16;
-  margin-top: ${props => (props.modalStyle ? '0' : '16')};
-  elevation: ${props => (props.modalStyle ? '0' : '16')};
+  elevation: ${props => (props.modalStyle ? '0' : '2')};
   padding-left: 24;
   padding-right: 24;
   min-height: ${props => (props.modalStyle ? '200' : '0')};
   padding-bottom: ${props => (props.modalStyle ? '40' : '0')};
-  padding-top: ${props => (props.modalStyle ? '40' : '0')};
 `;
 
 const OpenPDF = styled.TouchableOpacity`

@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import SwipeUpDown from 'react-native-swipe-up-down';
 import { Button, View, Text } from 'native-base';
+import { PanResponder } from 'react-native';
+import SwipeUpDown from './SwipeUpDown';
 import color from '../Styles/Color';
 import { Product } from '../Screens/Product';
 import { ProductCard } from './ProductCard';
 
 class ProductSheet extends Component {
-  pressHandler() {
-    this.props.func();
-  }
-
   render() {
     return (
       <SwipeUpDown
@@ -31,11 +28,12 @@ class ProductSheet extends Component {
             letzterScan="19.06.19 18:55"
           />
         }
-        itemFull={<Product />}
+        itemFull={<Product modal />}
         disablePressToShow={false}
         swipeHeight={250} // Default 60
         animation="spring"
-        style={{ padding: 0, paddingTop: 10, backgroundColor: color.gray09 }}
+        style={{ padding: 0, paddingTop: 10 }}
+        handleIsRead={this.props.handleIsRead}
       />
     );
   }
