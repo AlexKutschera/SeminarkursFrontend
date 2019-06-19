@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {
+  createStackNavigator,
   createAppContainer,
   createMaterialTopTabNavigator,
 } from 'react-navigation';
-import { YellowBox } from 'react-native';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { Hilfe, Login, Scanner } from './Screens/Index';
-import reducer from './reducers';
+import { AppRegistry, YellowBox } from 'react-native';
+import { Scanner, Login, Hilfe, Suche } from './Screens/Index';
 // TODO Entfernen vor Release
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket',
@@ -36,14 +34,8 @@ const AppNavigator = createMaterialTopTabNavigator(
 
 const AppContainer = createAppContainer(AppNavigator);
 
-const store = createStore(reducer);
-
 export default class App extends Component {
   render() {
-    return (
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
-    );
+    return <AppContainer />;
   }
 }
