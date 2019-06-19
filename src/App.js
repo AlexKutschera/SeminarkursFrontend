@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { YellowBox } from 'react-native';
-import Icon from 'react-native-ionicons';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { AppNavigator } from './router';
-import { Scanner, Login, Chat, Suche } from './Screens/Index';
-import { ScannerButton } from './Components/index';
-import color from './Styles/Color';
+import reducer from './reducers';
 // TODO Entfernen vor Release
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket',
@@ -17,8 +16,14 @@ YellowBox.ignoreWarnings([
 
 const AppContainer = createAppContainer(AppNavigator);
 
+const store = createStore(reducer);
+
 export default class App extends Component {
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
   }
 }
