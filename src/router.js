@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2019
+ */
+
 import React from "react";
 import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
 import Icon from "react-native-ionicons";
 import { AuthLoadingScreen, Chat, Product, Scanner, Suche } from "./Screens/Index";
 import color from "./Styles/Color";
 import { ScannerButton } from "./Components/index";
+import { hideResult } from "./actions/scanner";
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -20,6 +25,10 @@ const TabNavigator = createBottomTabNavigator(
       screen: Scanner,
       navigationOptions: () => ({
         tabBarIcon: props => <ScannerButton {...props} />,
+        tabBarOnPress: props => {
+          hideResult();
+          props.defaultHandler();
+        }
       }),
     },
     Chat: {

@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Icon from 'react-native-ionicons';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import color from '../Styles/Color';
-import { ProductCard, Comment } from '../Components';
+/*
+ * Copyright (c) 2019
+ */
+
+import React, { Component } from "react";
+import styled from "styled-components";
+import Icon from "react-native-ionicons";
+import { ScrollView } from "react-native-gesture-handler";
+import color from "../Styles/Color";
+import { Comment, ProductCard } from "../Components";
+import { connect } from "react-redux";
 
 class Product extends Component {
   static navigationOptions = {
@@ -25,8 +30,8 @@ class Product extends Component {
         <ScrollView style={{ paddingTop: marginModal }}>
           <ProductCard
             modal={false}
-            name="Endrohr"
-            id="00000000001"
+            name={this.props.scan_result.Art_Bez}
+            id={this.props.scan_result.ARTIKEL_ID}
             image={require('../../assets/Endrohr.jpg')}
             gruppe="8"
             teil="888"
@@ -73,7 +78,16 @@ class Product extends Component {
   }
 }
 
-export { Product };
+const mapStateToProps = state => ({
+  scan_result: state.scanner.scan_result
+});
+
+const ProductWithRedux = connect(
+  mapStateToProps,
+  {}
+)(Product);
+
+export { ProductWithRedux as Product };
 
 const Container = styled.View`
   background-color: ${color.gray09};

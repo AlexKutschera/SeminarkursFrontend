@@ -1,11 +1,17 @@
+/*
+ * Copyright (c) 2019
+ */
+
 import React, { Component } from "react";
 import { Container } from "native-base";
 import { RNCamera } from "react-native-camera";
 import styled from "styled-components";
 import Icon from "react-native-ionicons";
 import { Dimensions } from "react-native";
+import { withNavigationFocus } from "react-navigation";
 import { ProductSheet } from "../Components";
-import Socket from "../util/Socket";
+import { connect } from "react-redux";
+import { loadScannerData } from "../actions/scanner";
 
 // TODO Flashmode Button
 // TODO Permission Prompt
@@ -21,33 +27,30 @@ class Scanner extends Component<Props> {
     super(props);
     this.handleIsRead = this.handleIsRead.bind(this);
     this.state = {
-      code: '',
-      codeData: {},
-      isRead: true,
+      code: null,
+      flash: false
     };
   }
 
-  componentDidMount() {
-    this.socket = Socket.getSocket();
-    this.socket.on('connect', data => {
-      console.log('connected');
-    });
-    this.socket.on('reconnect_error', error => {
-      console.log(error);
-    });
-    this.socket.on('item', data => {
-      if (data.length > 0) {
-        this.setState({
-          codeData: data[0],
-        });
-      }
-      console.log(data);
-    });
-    console.log(this.socket);
+  componentDidUpdate() {
+    if (!this.props.show_result && this.state.code !== null) {
+      this.setState({
+        code: null
+      });
+    }
   }
+
+
 
   _showSuche = () => {
     this.props.navigation.navigate('Suche');
+  };
+
+  _toggleFlash = () => {
+    this.setState({
+      flash: !this.state.flash
+    });
+    console.log(this.state.flash);
   };
 
   handleIsRead(value) {
@@ -55,52 +58,58 @@ class Scanner extends Component<Props> {
   }
 
   loadItemData(code) {
-    this.setState({
-      isRead: true, // Invert isRead
-    });
+    console.log(code);
     if (code !== this.state.code) {
-      console.log(code);
-      console.log(this.socket.connected);
+      loadScannerData(code);
       this.setState({
-        code,
+        code: code
       });
-      this.socket.emit('item', { ITEM_ID: code });
     }
   }
 
   render() {
     return (
       <Container>
-        <RNCamera
-          flashMode={RNCamera.Constants.FlashMode.off}
-          ref={ref => {
-            this.camera = ref;
-          }}
-          style={{
-            flex: 1,
-          }}
-          onBarCodeRead={data => this.loadItemData(data.data)}
-          captureAudio={false}
-        />
+        {this.props.isFocused && (
+          <RNCamera
+            flashMode={
+              this.state.flash
+                ? RNCamera.Constants.FlashMode.torch
+                : RNCamera.Constants.FlashMode.off
+            }
+            ref={ref => {
+              this.camera = ref;
+            }}
+            style={{
+              flex: 1
+            }}
+            onBarCodeRead={data => this.loadItemData(data.data)}
+            captureAudio={false}
+          />
+        )}
         <Toolbar>
           <SearchButton onPress={this._showSuche}>
             <StyledIcon name="search" />
           </SearchButton>
-          <SearchButton
-            onPress={() => {
-              console.log(this.props.reInit);
-            }}
-          >
-            <StyledIcon name="flash-off" />
+          <SearchButton onPress={this._toggleFlash}>
+            {this.state.flash ? <StyledIcon name="flash"/> : <StyledIcon name="flash-off"/>}
           </SearchButton>
         </Toolbar>
-        {this.state.isRead && <Popup handleIsRead={this.handleIsRead} />}
+        {this.props.show_result && <Popup handleIsRead={this.handleIsRead}/>}
       </Container>
     );
   }
 }
 
-export { Scanner };
+const mapStateToProps = (state) => ({
+  show_result: state.scanner.show_result,
+  scan_result: state.scanner.scan_result
+});
+
+const ScannerWithNavigationFocus = withNavigationFocus(Scanner);
+const ScannerWithRedux = connect(mapStateToProps, {})(ScannerWithNavigationFocus);
+
+export { ScannerWithRedux as Scanner };
 
 const Popup = styled(ProductSheet)`
   width: ${Dimensions.get('window').width};
