@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import { createAppContainer } from 'react-navigation';
-import { YellowBox } from 'react-native';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { AppNavigator } from './router';
-import reducer from './reducers';
+import React, { Component } from "react";
+import { createAppContainer } from "react-navigation";
+import { YellowBox } from "react-native";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
+import { AppNavigator } from "./router";
+import reducer from "./reducers";
+import { INIT_SESSION_ID } from "./actions/user";
 // TODO Entfernen vor Release
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket',
@@ -18,7 +20,16 @@ const AppContainer = createAppContainer(AppNavigator);
 
 const store = createStore(reducer);
 
-export default class App extends Component {
+class App extends Component {
+  componentWillMount() {
+    AsyncStorage.getItem("session_id").then(value => {
+      store.dispatch({
+        type: INIT_SESSION_ID,
+        payload: value
+      });
+    });
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -27,3 +38,5 @@ export default class App extends Component {
     );
   }
 }
+
+export { App, store };

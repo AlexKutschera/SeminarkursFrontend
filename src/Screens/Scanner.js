@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-import { Container, Button, Text } from 'native-base';
-import { RNCamera } from 'react-native-camera';
-import io from 'socket.io-client/dist/socket.io';
-import styled from 'styled-components';
-import Icon from 'react-native-ionicons';
-import { Dimensions } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import SwipeUpDown from 'react-native-swipe-up-down';
-import { Product } from './Product';
-import { ProductCard, ProductSheet } from '../Components';
+import React, { Component } from "react";
+import { Container } from "native-base";
+import { RNCamera } from "react-native-camera";
+import styled from "styled-components";
+import Icon from "react-native-ionicons";
+import { Dimensions } from "react-native";
+import { ProductSheet } from "../Components";
+import Socket from "../util/Socket";
 
 // TODO Flashmode Button
 // TODO Permission Prompt
@@ -31,11 +28,7 @@ class Scanner extends Component<Props> {
   }
 
   componentDidMount() {
-    this.socket = io('https://seminarkurs.alexkutschera.de/', {
-      transports: ['websocket'],
-      upgrade: false,
-      rejectUnauthorized: null,
-    });
+    this.socket = Socket.getSocket();
     this.socket.on('connect', data => {
       console.log('connected');
     });
@@ -93,7 +86,11 @@ class Scanner extends Component<Props> {
           <SearchButton onPress={this._showSuche}>
             <StyledIcon name="search" />
           </SearchButton>
-          <SearchButton>
+          <SearchButton
+            onPress={() => {
+              console.log(this.props.reInit);
+            }}
+          >
             <StyledIcon name="flash-off" />
           </SearchButton>
         </Toolbar>

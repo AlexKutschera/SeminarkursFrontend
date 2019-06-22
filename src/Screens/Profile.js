@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import { Container, Text, Button, Body, Header, Content } from 'native-base';
-import { AsyncStorage, Dimensions } from 'react-native';
-import styled from 'styled-components';
-import Icon from 'react-native-ionicons';
-import color from '../Styles/Color';
-import { scale, moderateScale, verticalScale } from '../Styles/scaling';
+import React, { Component } from "react";
+import { Body, Button, Container } from "native-base";
+import { Dimensions } from "react-native";
+import styled from "styled-components";
+import Icon from "react-native-ionicons";
+import { withNavigation } from "react-navigation";
+import color from "../Styles/Color";
+import { moderateScale, verticalScale } from "../Styles/scaling";
+import { logout } from "../actions/user";
 
 const { width, height } = Dimensions.get('window');
 class Profile extends Component {
@@ -12,10 +14,9 @@ class Profile extends Component {
     title: 'Profile',
   };
 
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Login');
-  };
+  _logout() {
+    logout();
+  }
 
   render() {
     return (
@@ -35,7 +36,7 @@ class Profile extends Component {
             <Name>Johanna Wu</Name>
             <Abteilung>Support Boyscan</Abteilung>
           </ProfileCard>
-          <SignOutButton onPress={this._signOutAsync}>
+          <SignOutButton onPress={this._logout}>
             <ButtonText>Abmelden</ButtonText>
           </SignOutButton>
         </StyledBody>
@@ -44,7 +45,9 @@ class Profile extends Component {
   }
 }
 
-export { Profile };
+const ProfileWithNavigation = withNavigation(Profile);
+
+export { ProfileWithNavigation as Profile };
 
 const SignOutButton = styled(Button)`
   padding-top: ${moderateScale(10)};

@@ -1,22 +1,10 @@
-import React, { Component } from 'react';
-import {
-  Container,
-  Button,
-  Text,
-  Form,
-  Input,
-  Content,
-  Header,
-  Left,
-  Body,
-  Right,
-  Label,
-} from 'native-base';
-import styled from 'styled-components';
-import Icon from 'react-native-ionicons';
-import { AsyncStorage } from 'react-native';
-import { DefaultHeader } from '../Components';
-import color from '../Styles/Color';
+import React, { Component } from "react";
+import { Body, Button, Container, Content, Form, Header, Input, Label, Left, Right, Text } from "native-base";
+import styled from "styled-components";
+import Icon from "react-native-ionicons";
+import { connect } from "react-redux";
+import color from "../Styles/Color";
+import { login } from "../actions/user";
 
 class Login extends Component {
   static navigationOptions = {
@@ -24,10 +12,22 @@ class Login extends Component {
     tabBarIcon: <Icon name="person" />,
   };
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Profile');
+  state = {
+    username: "",
+    password: ""
   };
+
+  _signInAsync = async () => {
+    login(this.state.username, this.state.password);
+  };
+
+  componentDidMount() {
+    console.log(this.props);
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
+  }
 
   render() {
     return (
@@ -50,14 +50,20 @@ class Login extends Component {
         <Content>
           <LoginForm>
             <StyledItem>
-              <StyledLabel>E-Mail</StyledLabel>
-              <StyledInput placeholder="E-Mail eingeben" />
+              <StyledLabel>Benutzername</StyledLabel>
+              <StyledInput
+                placeholder="Benutzernamen eingeben"
+                value={this.state.username}
+                onChangeText={data => this.setState({ username: data })}
+              />
             </StyledItem>
             <StyledItem>
               <StyledLabel>Passwort</StyledLabel>
               <StyledInput
-                secureTextEntry={true}
+                secureTextEntry
                 placeholder="Passwort eingeben"
+                value={this.state.password}
+                onChangeText={data => this.setState({ password: data })}
               />
             </StyledItem>
             <StyledItem>
@@ -72,7 +78,16 @@ class Login extends Component {
   }
 }
 
-export { Login };
+const mapStateToProps = state => ({
+  session_id: state.user.session_id
+});
+
+const LoginWithRedux = connect(
+  mapStateToProps,
+  {}
+)(Login);
+
+export { LoginWithRedux as Login };
 
 const StyledItem = styled.View`
   border-bottom-width: 0;

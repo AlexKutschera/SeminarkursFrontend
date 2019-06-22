@@ -1,35 +1,27 @@
-import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Login } from "./Login";
+import { Profile } from "./Profile";
 
-class AuthLoadingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this._bootstrapAsync();
-  }
-
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'Profile' : 'Login');
-  };
-
-  // Render any loading content that you like here
+class AuthLoadingScreen extends Component {
   render() {
-    return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
-      </View>
+    return this.props.session_id === null ||
+    this.props.session_id === undefined ||
+    this.props.session_id === "" ? (
+      <Login/>
+    ) : (
+      <Profile/>
     );
   }
 }
-export { AuthLoadingScreen };
+
+const mapStateToProps = state => ({
+  session_id: state.user.session_id
+});
+
+const AuthLoadingScreenWithRedux = connect(
+  mapStateToProps,
+  {}
+)(AuthLoadingScreen);
+
+export { AuthLoadingScreenWithRedux as AuthLoadingScreen };

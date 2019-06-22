@@ -1,32 +1,14 @@
-import React, { Component } from 'react';
-import {
-  createSwitchNavigator,
-  createStackNavigator,
-  createBottomTabNavigator,
-} from 'react-navigation';
-import Icon from 'react-native-ionicons';
-import {
-  Scanner,
-  Login,
-  Chat,
-  Suche,
-  Profile,
-  AuthLoadingScreen,
-  Product,
-} from './Screens/Index';
-import color from './Styles/Color';
-import { ScannerButton } from './Components/index';
+import React from "react";
+import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
+import Icon from "react-native-ionicons";
+import { AuthLoadingScreen, Chat, Product, Scanner, Suche } from "./Screens/Index";
+import color from "./Styles/Color";
+import { ScannerButton } from "./Components/index";
 
-const LoginNavigator = createSwitchNavigator(
-  { Profile, Login, AuthLoading: AuthLoadingScreen },
-  {
-    initialRouteName: 'Login',
-  }
-);
 const TabNavigator = createBottomTabNavigator(
   {
     Login: {
-      screen: LoginNavigator,
+      screen: AuthLoadingScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <Icon name="person" color={tintColor} size={32} />
@@ -50,6 +32,8 @@ const TabNavigator = createBottomTabNavigator(
     },
   },
   {
+    resetOnBlur: true,
+    lazy: true,
     initialRouteName: 'Scanner',
     tabBarOptions: {
       showLabel: false, // hide labels
