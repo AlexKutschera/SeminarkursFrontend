@@ -9,6 +9,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "native-base": "^2.12.1",
     "react": "16.8.6",
     "react-native": "^0.59.9",

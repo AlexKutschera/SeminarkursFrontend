@@ -2,11 +2,12 @@
  * Copyright (c) 2019
  */
 
-import { HIDE_RESULT, SCAN_DATA } from "../actions/scanner";
+import { HIDE_RESULT, LOAD_COMMENTS, SCAN_DATA } from "../actions/scanner";
 
 const initialState = {
   scan_result: null,
-  show_result: false
+  show_result: false,
+  comments: []
 };
 
 export default (state = initialState, action) => {
@@ -22,7 +23,15 @@ export default (state = initialState, action) => {
     case HIDE_RESULT: {
       return {
         ...state,
-        show_result: false
+        show_result: false,
+        scan_result: null,
+        comments: []
+      };
+    }
+    case LOAD_COMMENTS: {
+      return {
+        ...state,
+        comments: action.payload
       };
     }
     default: {

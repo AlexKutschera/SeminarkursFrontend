@@ -9,6 +9,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import color from "../Styles/Color";
 import { Comment, ProductCard } from "../Components";
 import { connect } from "react-redux";
+import moment from "moment";
 
 class Product extends Component {
   static navigationOptions = {
@@ -20,6 +21,10 @@ class Product extends Component {
     this.state = {
       isModal: this.props.modal, // for use in the Scanner PopUp
     };
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.comments);
   }
 
   // TODO Rerender Comments on change of ProductCard
@@ -47,7 +52,7 @@ class Product extends Component {
             <CommentSection>
               <Header>
                 <Title>Kommentare</Title>
-                <CommentCount>2</CommentCount>
+                <CommentCount>{this.props.comments.length}</CommentCount>
               </Header>
               <ChatBar>
                 <Avatar source={require('../../assets/Avatar.jpg')} />
@@ -56,20 +61,16 @@ class Product extends Component {
                   <SendIcon name="send" size={24} />
                 </SendButton>
               </ChatBar>
-              <Comment
-                name="Wyatt Morris"
-                abteilung="Student IT"
-                date="09.04.19 12:45"
-                text="Das Foto ist nicht mehr up-to-date"
-                replies={[
-                  {
-                    name: 'Johanna Wu',
-                    abteilung: 'Student IT',
-                    date: '09.04.19 12:45',
-                    text: 'Das Foto ist nicht mehr up-to-date',
-                  },
-                ]}
-              />
+              {this.props.comments.map((comment, i) => (
+                <Comment
+                  name={"Name not defined"}
+                  abteilung={"Abteilung not defined"}
+                  date={moment(comment.Timestamp).format("DD.MM.YYYY HH:mm")}
+                  text={comment.Comment}
+                  replies={[]}
+                  key={i}
+                />
+              ))}
             </CommentSection>
           )}
         </ScrollView>
@@ -79,7 +80,8 @@ class Product extends Component {
 }
 
 const mapStateToProps = state => ({
-  scan_result: state.scanner.scan_result
+  scan_result: state.scanner.scan_result,
+  comments: state.scanner.comments
 });
 
 const ProductWithRedux = connect(

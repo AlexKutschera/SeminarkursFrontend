@@ -1,6 +1,10 @@
-import React, { Component, View } from 'react';
-import styled from 'styled-components';
-import color from '../Styles/Color';
+/*
+ * Copyright (c) 2019
+ */
+
+import React, { Component } from "react";
+import styled from "styled-components";
+import color from "../Styles/Color";
 
 class Comment extends Component {
   constructor(props) {
@@ -57,10 +61,10 @@ class Comment extends Component {
           {this.props.text}
           {/* TODO Mehr anzeigen Knopf Comment Text */}
         </CommentText>
-        <ReplyButton>
+        {/*<ReplyButton>
           <ReplyButtonText>Antworten</ReplyButtonText>
-        </ReplyButton>
-        {repliesRow}
+        </ReplyButton>*/}
+        {/*{repliesRow}*/}
         {/* <Wrapper>
           <CommentHead>
             <CommentAvatar source={require('../../assets/Avatar.jpg')} />

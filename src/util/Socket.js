@@ -5,8 +5,9 @@
 import io from "socket.io-client/dist/socket.io";
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 import { store } from "../App";
-import { LOGIN } from "../actions/user";
-import { SCAN_DATA } from "../actions/scanner";
+import { LOGIN, logout } from "../actions/user";
+import { LOAD_COMMENTS, SCAN_DATA } from "../actions/scanner";
+import { setOffline, setOnline } from "../actions/state";
 
 class Socket {
   static socket = null;
@@ -28,7 +29,24 @@ class Socket {
           payload: data[0]
         });
       }
+      if (data === "Nicht ausreichende Berechtigung") {
+        logout();
+      }
     });
+    this.socket.on("get.comment.item.result", data => {
+      console.log(data.result);
+      if (data !== "Nicht ausreichende Berechtigung") {
+        store.dispatch({
+          type: LOAD_COMMENTS,
+          payload: data.result
+        });
+      }
+      if (data === "Nicht ausreichende Berechtigung") {
+        logout();
+      }
+    });
+    this.socket.on("connect", () => setOnline());
+    this.socket.on("disconnect", () => setOffline());
   }
 
   static getSocket() {

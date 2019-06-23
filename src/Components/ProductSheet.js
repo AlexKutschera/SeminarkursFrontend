@@ -34,7 +34,7 @@ class ProductSheet extends Component {
         }
         itemFull={<Product modal />}
         disablePressToShow={false}
-        swipeHeight={250} // Default 60
+        swipeHeight={250} // Default 60cd
         animation="spring"
         style={{ padding: 0, paddingTop: 10 }}
         handleIsRead={hideResult}

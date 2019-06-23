@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019
+ */
+
 import React, { Component } from "react";
 import { createAppContainer } from "react-navigation";
 import { YellowBox } from "react-native";
@@ -7,6 +11,7 @@ import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 import { AppNavigator } from "./router";
 import reducer from "./reducers";
 import { INIT_SESSION_ID } from "./actions/user";
+import Socket from "./util/Socket";
 // TODO Entfernen vor Release
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket',
@@ -22,6 +27,7 @@ const store = createStore(reducer);
 
 class App extends Component {
   componentWillMount() {
+    Socket.connect();
     AsyncStorage.getItem("session_id").then(value => {
       store.dispatch({
         type: INIT_SESSION_ID,

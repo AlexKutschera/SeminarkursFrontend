@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from "react";
-import { Container } from "native-base";
+import { Container, Text } from "native-base";
 import { RNCamera } from "react-native-camera";
 import styled from "styled-components";
 import Icon from "react-native-ionicons";
@@ -91,6 +91,9 @@ class Scanner extends Component<Props> {
           <SearchButton onPress={this._showSuche}>
             <StyledIcon name="search" />
           </SearchButton>
+          <Text>{this.props.is_online ? "Verbunden" : "Nicht verbunden"} | {(this.props.session_id === null ||
+            this.props.session_id === undefined ||
+            this.props.session_id === "") ? "Nicht angemeldet" : "Angemeldet"}</Text>
           <SearchButton onPress={this._toggleFlash}>
             {this.state.flash ? <StyledIcon name="flash"/> : <StyledIcon name="flash-off"/>}
           </SearchButton>
@@ -103,7 +106,9 @@ class Scanner extends Component<Props> {
 
 const mapStateToProps = (state) => ({
   show_result: state.scanner.show_result,
-  scan_result: state.scanner.scan_result
+  scan_result: state.scanner.scan_result,
+  is_online: state.state.is_online,
+  session_id: state.user.session_id
 });
 
 const ScannerWithNavigationFocus = withNavigationFocus(Scanner);

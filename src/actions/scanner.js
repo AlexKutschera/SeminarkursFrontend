@@ -6,6 +6,7 @@ import { store } from "../App";
 import Socket from "../util/Socket";
 
 export const SCAN_DATA = "SCAN_DATA";
+export const LOAD_COMMENTS = "LOAD_COMMENTS";
 export const HIDE_RESULT = "HIDE_RESULT";
 
 export const hideResult = () => {
@@ -17,6 +18,10 @@ export const hideResult = () => {
 
 export const loadScannerData = scannerResult => {
   Socket.getSocket().emit("item.get", {
+    condition: scannerResult,
+    session_id: store.getState().user.session_id
+  });
+  Socket.getSocket().emit("get.comment.item", {
     condition: scannerResult,
     session_id: store.getState().user.session_id
   });
