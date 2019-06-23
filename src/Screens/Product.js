@@ -68,7 +68,9 @@ class Product extends Component {
                 />
                 <SendButton
                   onPress={() => {
-                    console.log("LOL");
+                    this.setState({
+                      new_comment: ""
+                    });
                     addComment(
                       this.state.new_comment,
                       this.props.scan_result.ITEM_ID

@@ -1,8 +1,14 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Icon from 'react-native-ionicons';
-import { View } from 'native-base';
-import color from '../Styles/Color';
+/*
+ * Copyright (c) 2019
+ */
+
+import React, { Component } from "react";
+import styled from "styled-components";
+import Icon from "react-native-ionicons";
+import { View } from "native-base";
+import color from "../Styles/Color";
+import { withNavigation } from "react-navigation";
+
 
 class ProductCard extends Component {
   constructor(props) {
@@ -43,7 +49,9 @@ class ProductCard extends Component {
       <Card modalStyle={this.state.isModal}>
         {!this.state.isModal ? (
           <OpenPDF
-            onPress={console.log('PDF öffnen') /* Hier Link zum PDF öffnen */}
+            onPress={() => {
+              this.props.navigation.navigate("Datenblatt");
+            }}
           >
             <PDFLinkText>Datenblatt</PDFLinkText>
             <Icon name="open" color={color.gray08} size={16} />
@@ -159,7 +167,9 @@ class ProductCard extends Component {
   }
 }
 
-export { ProductCard };
+const ProductCardWithNavigation = withNavigation(ProductCard);
+
+export { ProductCardWithNavigation as ProductCard };
 const Card = styled.View`
   background-color: ${color.white};
   border-radius: 12;

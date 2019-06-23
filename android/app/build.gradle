@@ -94,6 +94,23 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
+    packagingOptions {
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libjsc.so'
+        pickFirst 'lib/arm64-v8a/libjsc.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\alexk\\WebstormProjects\\SeminarkursFrontend\\seminarkurs.keystore')
+            storePassword 'seminarkurs'
+            keyAlias = 'Seminarkurs'
+            keyPassword 'seminarkurs'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -139,6 +156,8 @@ android {
 }
 
 dependencies {
+    implementation project(':rn-fetch-blob')
+    implementation project(':react-native-pdf')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-camera')
     implementation fileTree(dir: "libs", include: ["*.jar"])

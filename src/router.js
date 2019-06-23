@@ -9,6 +9,7 @@ import { AuthLoadingScreen, Chat, Product, Scanner, Suche } from "./Screens/Inde
 import color from "./Styles/Color";
 import { ScannerButton } from "./Components/index";
 import { hideResult } from "./actions/scanner";
+import { Datenblatt } from "./Screens/Datenblatt";
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -62,6 +63,7 @@ export const AppNavigator = createStackNavigator(
     Suche,
     Product,
     TabNavigator,
+    Datenblatt
   },
   { initialRouteName: 'TabNavigator', headerMode: 'none' }
 );

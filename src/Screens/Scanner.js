@@ -16,9 +16,10 @@ import { loadScannerData } from "../actions/scanner";
 // TODO Flashmode Button
 // TODO Permission Prompt
 type Props = {};
+
 class Scanner extends Component<Props> {
   static navigationOptions = {
-    title: 'Scanner',
+    title: "Scanner"
   };
 
   socket = null;
@@ -40,10 +41,8 @@ class Scanner extends Component<Props> {
     }
   }
 
-
-
   _showSuche = () => {
-    this.props.navigation.navigate('Suche');
+    this.props.navigation.navigate("Suche");
   };
 
   _toggleFlash = () => {
@@ -89,7 +88,7 @@ class Scanner extends Component<Props> {
         )}
         <Toolbar>
           <SearchButton onPress={this._showSuche}>
-            <StyledIcon name="search" />
+            <StyledIcon name="search"/>
           </SearchButton>
           <Text>{this.props.is_online ? "Verbunden" : "Nicht verbunden"} | {(this.props.session_id === null ||
             this.props.session_id === undefined ||
@@ -117,7 +116,7 @@ const ScannerWithRedux = connect(mapStateToProps, {})(ScannerWithNavigationFocus
 export { ScannerWithRedux as Scanner };
 
 const Popup = styled(ProductSheet)`
-  width: ${Dimensions.get('window').width};
+  width: ${Dimensions.get("window").width};
   position: absolute;
   left: 0;
   bottom: 0;
@@ -125,7 +124,7 @@ const Popup = styled(ProductSheet)`
   height: 200;
 `;
 const Toolbar = styled.View`
-  width: ${Dimensions.get('window').width};
+  width: ${Dimensions.get("window").width};
   position: absolute;
   left: 0;
   top: 32;
