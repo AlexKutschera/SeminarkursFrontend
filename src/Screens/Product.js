@@ -6,14 +6,19 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Icon from "react-native-ionicons";
 import { ScrollView } from "react-native-gesture-handler";
-import color from "../Styles/Color";
-import { Comment, ProductCard } from "../Components";
 import { connect } from "react-redux";
 import moment from "moment";
+import color from "../Styles/Color";
+import { Comment, ProductCard } from "../Components";
+import { addComment } from "../actions/scanner";
 
 class Product extends Component {
   static navigationOptions = {
     title: 'Product',
+  };
+
+  state = {
+    new_comment: ""
   };
 
   constructor(props) {
@@ -56,15 +61,27 @@ class Product extends Component {
               </Header>
               <ChatBar>
                 <Avatar source={require('../../assets/Avatar.jpg')} />
-                <MessageInput placeholder="Kommentar hinzufügen" />
-                <SendButton>
+                <MessageInput
+                  placeholder="Kommentar hinzufügen"
+                  value={this.state.new_comment}
+                  onChangeText={data => this.setState({ new_comment: data })}
+                />
+                <SendButton
+                  onPress={() => {
+                    console.log("LOL");
+                    addComment(
+                      this.state.new_comment,
+                      this.props.scan_result.ITEM_ID
+                    );
+                  }}
+                >
                   <SendIcon name="send" size={24} />
                 </SendButton>
               </ChatBar>
               {this.props.comments.map((comment, i) => (
                 <Comment
-                  name={"Name not defined"}
-                  abteilung={"Abteilung not defined"}
+                  name={comment.Com_Bez}
+                  abteilung="Abteilung not defined"
                   date={moment(comment.Timestamp).format("DD.MM.YYYY HH:mm")}
                   text={comment.Comment}
                   replies={[]}

@@ -16,13 +16,25 @@ export const hideResult = () => {
   });
 };
 
+export const loadItemComments = itemID => {
+  Socket.getSocket().emit("get.comment.item", {
+    condition: itemID,
+    session_id: store.getState().user.session_id
+  });
+};
+
 export const loadScannerData = scannerResult => {
   Socket.getSocket().emit("item.get", {
     condition: scannerResult,
     session_id: store.getState().user.session_id
   });
-  Socket.getSocket().emit("get.comment.item", {
-    condition: scannerResult,
-    session_id: store.getState().user.session_id
+  loadItemComments(scannerResult);
+};
+
+export const addComment = (comment, itemID) => {
+  Socket.getSocket().emit("user.comment", {
+    session_id: store.getState().user.session_id,
+    kommentar: comment,
+    item: itemID
   });
 };

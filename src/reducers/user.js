@@ -1,7 +1,13 @@
-import { INIT_SESSION_ID, LOGIN, LOGOUT } from "../actions/user";
+/*
+ * Copyright (c) 2019
+ */
+
+import { INIT_SESSION_ID, LOAD_USER_DATA, loadUserData, LOGIN, LOGOUT } from "../actions/user";
 
 const initialState = {
-  session_id: null
+  session_id: null,
+  username: "",
+  department: ""
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +25,15 @@ export default (state = initialState, action) => {
         session_id: null
       };
     }
+    case LOAD_USER_DATA: {
+      return {
+        ...state,
+        username: action.payload.Benutzername,
+        department: action.payload.Abteilung
+      };
+    }
     case INIT_SESSION_ID: {
+      loadUserData(action.payload);
       return {
         ...state,
         session_id: action.payload

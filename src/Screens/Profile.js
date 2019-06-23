@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2019
+ */
+
 import React, { Component } from "react";
 import { Body, Button, Container } from "native-base";
 import { Dimensions } from "react-native";
 import styled from "styled-components";
 import Icon from "react-native-ionicons";
 import { withNavigation } from "react-navigation";
+import { connect } from "react-redux";
 import color from "../Styles/Color";
 import { moderateScale, verticalScale } from "../Styles/scaling";
 import { logout } from "../actions/user";
@@ -16,6 +21,10 @@ class Profile extends Component {
 
   _logout() {
     logout();
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
   }
 
   render() {
@@ -33,8 +42,8 @@ class Profile extends Component {
         <StyledBody>
           <ProfileCard>
             <Avatar source={require('../../assets/Avatar.jpg')} />
-            <Name>Johanna Wu</Name>
-            <Abteilung>Support Boyscan</Abteilung>
+            <Name>{this.props.username}</Name>
+            <Abteilung>{this.props.department}</Abteilung>
           </ProfileCard>
           <SignOutButton onPress={this._logout}>
             <ButtonText>Abmelden</ButtonText>
@@ -45,9 +54,18 @@ class Profile extends Component {
   }
 }
 
-const ProfileWithNavigation = withNavigation(Profile);
+const mapStateToProps = state => ({
+  username: state.user.username,
+  department: state.user.department
+});
 
-export { ProfileWithNavigation as Profile };
+const ProfileWithNavigation = withNavigation(Profile);
+const ProfileWithRedux = connect(
+  mapStateToProps,
+  {}
+)(ProfileWithNavigation);
+
+export { ProfileWithRedux as Profile };
 
 const SignOutButton = styled(Button)`
   padding-top: ${moderateScale(10)};
