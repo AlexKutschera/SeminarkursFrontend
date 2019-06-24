@@ -102,15 +102,6 @@ android {
         pickFirst 'lib/x86_64/libc++_shared.so'
         pickFirst 'lib/armeabi-v7a/libc++_shared.so'
     }
-
-    signingConfigs {
-        debug {
-            storeFile file('C:\\Users\\alexk\\WebstormProjects\\SeminarkursFrontend\\seminarkurs.keystore')
-            storePassword 'seminarkurs'
-            keyAlias = 'Seminarkurs'
-            keyPassword 'seminarkurs'
-        }
-    }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -138,10 +129,6 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.debug
-        }
-        debug {
-            signingConfig signingConfigs.debug
         }
     }
     // applicationVariants are e.g. debug, release
