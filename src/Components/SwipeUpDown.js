@@ -8,7 +8,7 @@ import { Dimensions, LayoutAnimation, PanResponder, Platform, StyleSheet, Toucha
 import Icon from "react-native-ionicons";
 import color from "../Styles/Color";
 import { store } from "../App";
-import { SET_POPUP_COLLAPSED, setPopupCollapse } from "../actions/state";
+import { setPopupCollapse } from "../actions/state";
 
 const MARGIN_TOP = Platform.OS === 'ios' ? 20 : 0;
 const DEVICE_HEIGHT = Dimensions.get('window').height - MARGIN_TOP;
@@ -101,7 +101,8 @@ export default class SwipeUpDown extends Component<Props> {
       this.customStyle.style.top = this.top + gestureState.dy;
       this.customStyle.style.height = DEVICE_HEIGHT - gestureState.dy;
       this.setState({ iconDown: false });
-      /*       !this.state.collapsed && this.setState({ collapsed: true }); */
+      !this.state.collapsed && this.setState({ collapsed: true });
+      setPopupCollapse(true);
       this.updateNativeProps();
     } else if (this.checkCollapsed && gestureState.dy < -60) {
       // SWIPE UP
@@ -124,10 +125,7 @@ export default class SwipeUpDown extends Component<Props> {
       this.customStyle.style.height = DEVICE_HEIGHT - gestureState.dy;
       this.setState({ iconDown: false });
       !this.state.collapsed && this.setState({ collapsed: true });
-      store.dispatch({
-        type: SET_POPUP_COLLAPSED,
-        payload: true
-      });
+      setPopupCollapse(true);
       this.updateNativeProps();
     }
   }
