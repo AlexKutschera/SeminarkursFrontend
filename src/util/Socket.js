@@ -47,6 +47,10 @@ class Socket {
       if (data !== "Nicht ausreichende Berechtigung") {
         store.dispatch({
           type: LOAD_COMMENTS,
+          payload: []
+        });
+        store.dispatch({
+          type: LOAD_COMMENTS,
           payload: data.result
         });
       }

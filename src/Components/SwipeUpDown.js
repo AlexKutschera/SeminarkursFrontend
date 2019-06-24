@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  View,
-  PanResponder,
-  Dimensions,
-  LayoutAnimation,
-  TouchableOpacity,
-} from 'react-native';
+/*
+ * Copyright (c) 2019
+ */
 
-import Icon from 'react-native-ionicons';
-import color from '../Styles/Color';
+import React, { Component } from "react";
+import { Dimensions, LayoutAnimation, PanResponder, Platform, StyleSheet, TouchableOpacity, View } from "react-native";
+
+import Icon from "react-native-ionicons";
+import color from "../Styles/Color";
+import { store } from "../App";
+import { SET_POPUP_COLLAPSED, setPopupCollapse } from "../actions/state";
 
 const MARGIN_TOP = Platform.OS === 'ios' ? 20 : 0;
 const DEVICE_HEIGHT = Dimensions.get('window').height - MARGIN_TOP;
@@ -25,6 +23,16 @@ type Props = {
   onShowFull?: () => void,
   animation?: 'linear' | 'spring' | 'easeInEaseOut' | 'none',
 };
+
+const getTouchPosition = ({ moveY }) => {
+  if (store.getState().state.popup_collapsed) {
+    return true;
+  }
+  if (!store.getState().state.popup_collapsed && moveY < 40) {
+    return true;
+  }
+};
+
 export default class SwipeUpDown extends Component<Props> {
   static defautProps = {
     disablePressToShow: false,
@@ -54,14 +62,18 @@ export default class SwipeUpDown extends Component<Props> {
 
   componentWillMount() {
     this._panResponder = PanResponder.create({
-      onMoveShouldSetPanResponder: (event, gestureState) => true,
+      onMoveShouldSetPanResponder: (event, gestureState) => getTouchPosition(gestureState),
       onPanResponderMove: this._onPanResponderMove.bind(this),
       onPanResponderRelease: this._onPanResponderRelease.bind(this),
+      onPanResponderTerminationRequest: (evt, gestureState) => true
     });
   }
 
   componentDidMount() {
     this.props.hasRef && this.props.hasRef(this);
+    this.setState({
+      mounted: true
+    });
   }
 
   updateNativeProps() {
@@ -105,12 +117,17 @@ export default class SwipeUpDown extends Component<Props> {
       }
       this.updateNativeProps();
       this.state.collapsed && this.setState({ collapsed: false });
+      setPopupCollapse(false);
     } else if (this.checkCollapsed && gestureState.dy) {
       this.customStyle.style.top =
         DEVICE_HEIGHT - this.SWIPE_HEIGHT + gestureState.dy;
       this.customStyle.style.height = DEVICE_HEIGHT - gestureState.dy;
       this.setState({ iconDown: false });
       !this.state.collapsed && this.setState({ collapsed: true });
+      store.dispatch({
+        type: SET_POPUP_COLLAPSED,
+        payload: true
+      });
       this.updateNativeProps();
     }
   }

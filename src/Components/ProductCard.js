@@ -6,9 +6,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Icon from "react-native-ionicons";
 import { View } from "native-base";
-import color from "../Styles/Color";
 import { withNavigation } from "react-navigation";
-
+import color from "../Styles/Color";
 
 class ProductCard extends Component {
   constructor(props) {
@@ -31,9 +30,16 @@ class ProductCard extends Component {
   }
 
   toggleHidden() {
+    console.log(this.props);
+    this.props.rerenderParentCallback();
     this.setState({
       isExpanded: !this.state.isExpanded, // Invert isExpanded
     });
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
+    // this.props.rerenderParentCallback();
   }
 
   render() {
@@ -157,7 +163,7 @@ class ProductCard extends Component {
           )}
         </Information>
         {!this.state.isModal && (
-          <Collapse onPress={this.toggleHidden.bind(this)}>
+          <Collapse onPress={() => this.toggleHidden()}>
             <CollapseText>{collapse}</CollapseText>
             <Icon name={icon} color={color.gray08} size={12} />
           </Collapse>

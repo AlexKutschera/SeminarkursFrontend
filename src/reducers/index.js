@@ -6,9 +6,11 @@ import { combineReducers } from "redux";
 import userReducer from "./user";
 import scannerReducer from "./scanner";
 import stateReducer from "./state";
+import searchReducer from "./search";
 
 export default combineReducers({
   user: userReducer,
   scanner: scannerReducer,
-  state: stateReducer
+  state: stateReducer,
+  search: searchReducer
 });

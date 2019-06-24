@@ -33,6 +33,12 @@ class Scanner extends Component<Props> {
     };
   }
 
+  // componentDidMount(){
+  //   setTimeout(() => {
+  //     this.loadItemData(1);
+  //   });
+  // }
+
   componentDidUpdate() {
     if (!this.props.show_result && this.state.code !== null) {
       this.setState({

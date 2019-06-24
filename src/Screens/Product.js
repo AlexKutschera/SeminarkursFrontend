@@ -5,7 +5,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Icon from "react-native-ionicons";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import moment from "moment";
 import color from "../Styles/Color";
@@ -18,7 +18,8 @@ class Product extends Component {
   };
 
   state = {
-    new_comment: ""
+    new_comment: "",
+    timestamp: moment()
   };
 
   constructor(props) {
@@ -26,10 +27,18 @@ class Product extends Component {
     this.state = {
       isModal: this.props.modal, // for use in the Scanner PopUp
     };
+    this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
   }
 
   componentDidUpdate() {
     console.log(this.props.comments);
+  }
+
+  rerenderParentCallback() {
+    console.log("RERENDER");
+    this.setState({
+      timestamp: moment()
+    });
   }
 
   // TODO Rerender Comments on change of ProductCard
@@ -37,62 +46,65 @@ class Product extends Component {
     const marginModal = this.state.isModal ? 0 : 16;
     return (
       <Container>
-        <ScrollView style={{ paddingTop: marginModal }}>
-          <ProductCard
-            modal={false}
-            name={this.props.scan_result.Art_Bez}
-            id={this.props.scan_result.ARTIKEL_ID}
-            image={require('../../assets/Endrohr.jpg')}
-            gruppe="8"
-            teil="888"
-            reihe="8888"
-            material="Aluminium"
-            kunde="BMW"
-            erstellung="19.05.19"
-            gewicht="550g"
-            zulieferer="Alu BW"
-            letzterScan="19.06.19 18:55"
-          />
-          {this.state.isModal && (
-            <CommentSection>
-              <Header>
-                <Title>Kommentare</Title>
-                <CommentCount>{this.props.comments.length}</CommentCount>
-              </Header>
-              <ChatBar>
-                <Avatar source={require('../../assets/Avatar.jpg')} />
-                <MessageInput
-                  placeholder="Kommentar hinzufügen"
-                  value={this.state.new_comment}
-                  onChangeText={data => this.setState({ new_comment: data })}
-                />
-                <SendButton
-                  onPress={() => {
-                    this.setState({
-                      new_comment: ""
-                    });
-                    addComment(
-                      this.state.new_comment,
-                      this.props.scan_result.ITEM_ID
-                    );
-                  }}
-                >
-                  <SendIcon name="send" size={24} />
-                </SendButton>
-              </ChatBar>
-              {this.props.comments.map((comment, i) => (
-                <Comment
-                  name={comment.Com_Bez}
-                  abteilung="Abteilung not defined"
-                  date={moment(comment.Timestamp).format("DD.MM.YYYY HH:mm")}
-                  text={comment.Comment}
-                  replies={[]}
-                  key={i}
-                />
-              ))}
-            </CommentSection>
-          )}
-        </ScrollView>
+        <TouchableWithoutFeedback>
+          <ScrollView style={{ paddingTop: marginModal }}>
+            <ProductCard
+              modal={false}
+              name={this.props.scan_result.Art_Bez}
+              id={this.props.scan_result.ARTIKEL_ID}
+              image={require("../../assets/Endrohr.jpg")}
+              gruppe="8"
+              teil="888"
+              reihe="8888"
+              material="Aluminium"
+              kunde="BMW"
+              erstellung="19.05.19"
+              gewicht="550g"
+              zulieferer="Alu BW"
+              letzterScan="19.06.19 18:55"
+              rerenderParentCallback={this.rerenderParentCallback}
+            />
+            {this.state.isModal && (
+              <CommentSection>
+                <Header>
+                  <Title>Kommentare</Title>
+                  <CommentCount>{this.props.comments.length}</CommentCount>
+                </Header>
+                <ChatBar>
+                  <Avatar source={require("../../assets/Avatar.jpg")}/>
+                  <MessageInput
+                    placeholder="Kommentar hinzufügen"
+                    value={this.state.new_comment}
+                    onChangeText={data => this.setState({ new_comment: data })}
+                  />
+                  <SendButton
+                    onPress={() => {
+                      this.setState({
+                        new_comment: ""
+                      });
+                      addComment(
+                        this.state.new_comment,
+                        this.props.scan_result.ITEM_ID
+                      );
+                    }}
+                  >
+                    <SendIcon name="send" size={24}/>
+                  </SendButton>
+                </ChatBar>
+                {this.props.comments.map((comment, i) => (
+                  <Comment
+                    name={comment.Benutzername}
+                    abteilung={comment.Abteilung}
+                    date={moment(comment.Timestamp).format("DD.MM.YYYY HH:mm")}
+                    text={comment.Comment}
+                    replies={[]}
+                    key={i}
+                  />
+                ))}
+              </CommentSection>
+            )}
+          </ScrollView>
+        </TouchableWithoutFeedback>
       </Container>
     );
   }

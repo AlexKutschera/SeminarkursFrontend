@@ -2,10 +2,12 @@
  * Copyright (c) 2019
  */
 
-import { SET_OFFLINE, SET_ONLINE } from "../actions/state";
+import { SET_OFFLINE, SET_ONLINE, SET_POPUP_COLLAPSED } from "../actions/state";
+import { HIDE_RESULT } from "../actions/scanner";
 
 const initialState = {
-  is_online: false
+  is_online: false,
+  popup_collapsed: true
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +23,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         is_online: false
+      };
+    }
+    case SET_POPUP_COLLAPSED: {
+      return {
+        ...state,
+        popup_collapsed: action.payload
+      };
+    }
+    case HIDE_RESULT: {
+      return {
+        ...state,
+        popup_collapsed: true
       };
     }
     default: {
