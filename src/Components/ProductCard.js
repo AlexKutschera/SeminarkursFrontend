@@ -56,7 +56,7 @@ class ProductCard extends Component {
         {!this.state.isModal ? (
           <OpenPDF
             onPress={() => {
-              this.props.navigation.navigate("Datenblatt");
+              this.props.navigation.navigate('Datenblatt');
             }}
           >
             <PDFLinkText>Datenblatt</PDFLinkText>

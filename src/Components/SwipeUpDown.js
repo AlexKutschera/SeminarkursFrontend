@@ -62,17 +62,18 @@ export default class SwipeUpDown extends Component<Props> {
 
   componentWillMount() {
     this._panResponder = PanResponder.create({
-      onMoveShouldSetPanResponder: (event, gestureState) => getTouchPosition(gestureState),
+      onMoveShouldSetPanResponder: (event, gestureState) =>
+        getTouchPosition(gestureState),
       onPanResponderMove: this._onPanResponderMove.bind(this),
       onPanResponderRelease: this._onPanResponderRelease.bind(this),
-      onPanResponderTerminationRequest: (evt, gestureState) => true
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
     });
   }
 
   componentDidMount() {
     this.props.hasRef && this.props.hasRef(this);
     this.setState({
-      mounted: true
+      mounted: true,
     });
   }
 

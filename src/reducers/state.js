@@ -7,7 +7,7 @@ import { HIDE_RESULT } from "../actions/scanner";
 
 const initialState = {
   is_online: false,
-  popup_collapsed: true
+  popup_collapsed: true,
 };
 
 export default (state = initialState, action) => {
@@ -16,25 +16,25 @@ export default (state = initialState, action) => {
     case SET_ONLINE: {
       return {
         ...state,
-        is_online: true
+        is_online: true,
       };
     }
     case SET_OFFLINE: {
       return {
         ...state,
-        is_online: false
+        is_online: false,
       };
     }
     case SET_POPUP_COLLAPSED: {
       return {
         ...state,
-        popup_collapsed: action.payload
+        popup_collapsed: action.payload,
       };
     }
     case HIDE_RESULT: {
       return {
         ...state,
-        popup_collapsed: true
+        popup_collapsed: true,
       };
     }
     default: {

@@ -12,5 +12,5 @@ export default combineReducers({
   user: userReducer,
   scanner: scannerReducer,
   state: stateReducer,
-  search: searchReducer
+  search: searchReducer,
 });

@@ -6,8 +6,8 @@ import { INIT_SESSION_ID, LOAD_USER_DATA, loadUserData, LOGIN, LOGOUT } from "..
 
 const initialState = {
   session_id: null,
-  username: "",
-  department: ""
+  username: '',
+  department: '',
 };
 
 export default (state = initialState, action) => {
@@ -16,27 +16,27 @@ export default (state = initialState, action) => {
     case LOGIN: {
       return {
         ...state,
-        session_id: action.payload
+        session_id: action.payload,
       };
     }
     case LOGOUT: {
       return {
         ...state,
-        session_id: null
+        session_id: null,
       };
     }
     case LOAD_USER_DATA: {
       return {
         ...state,
         username: action.payload.Benutzername,
-        department: action.payload.Abteilung
+        department: action.payload.Abteilung,
       };
     }
     case INIT_SESSION_ID: {
       loadUserData(action.payload);
       return {
         ...state,
-        session_id: action.payload
+        session_id: action.payload,
       };
     }
     default: {

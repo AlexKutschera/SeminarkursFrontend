@@ -28,10 +28,10 @@ const store = createStore(reducer);
 class App extends Component {
   componentWillMount() {
     Socket.connect();
-    AsyncStorage.getItem("session_id").then(value => {
+    AsyncStorage.getItem('session_id').then(value => {
       store.dispatch({
         type: INIT_SESSION_ID,
-        payload: value
+        payload: value,
       });
     });
   }

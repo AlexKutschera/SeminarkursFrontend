@@ -56,7 +56,7 @@ class Profile extends Component {
 
 const mapStateToProps = state => ({
   username: state.user.username,
-  department: state.user.department
+  department: state.user.department,
 });
 
 const ProfileWithNavigation = withNavigation(Profile);

@@ -18,8 +18,8 @@ class Product extends Component {
   };
 
   state = {
-    new_comment: "",
-    timestamp: moment()
+    new_comment: '',
+    timestamp: moment(),
   };
 
   constructor(props) {
@@ -35,9 +35,9 @@ class Product extends Component {
   }
 
   rerenderParentCallback() {
-    console.log("RERENDER");
+    console.log('RERENDER');
     this.setState({
-      timestamp: moment()
+      timestamp: moment(),
     });
   }
 
@@ -52,15 +52,15 @@ class Product extends Component {
               modal={false}
               name={this.props.scan_result.Art_Bez}
               id={this.props.scan_result.ARTIKEL_ID}
-              image={require("../../assets/Endrohr.jpg")}
+              image={require('../../assets/Endrohr.jpg')}
               gruppe="8"
               teil="888"
               reihe="8888"
-              material="Aluminium"
-              kunde="BMW"
-              erstellung="19.05.19"
-              gewicht="550g"
-              zulieferer="Alu BW"
+              material={this.props.scan_result.Material}
+              kunde={this.props.scan_result.Kunde}
+              erstellung={this.props.scan_result.Erstellung}
+              gewicht={this.props.scan_result.Gewicht}
+              zulieferer={this.props.scan_result.Zulieferer}
               letzterScan="19.06.19 18:55"
               rerenderParentCallback={this.rerenderParentCallback}
             />
@@ -71,7 +71,7 @@ class Product extends Component {
                   <CommentCount>{this.props.comments.length}</CommentCount>
                 </Header>
                 <ChatBar>
-                  <Avatar source={require("../../assets/Avatar.jpg")}/>
+                  <Avatar source={require('../../assets/Avatar.jpg')} />
                   <MessageInput
                     placeholder="Kommentar hinzufügen"
                     value={this.state.new_comment}
@@ -80,7 +80,7 @@ class Product extends Component {
                   <SendButton
                     onPress={() => {
                       this.setState({
-                        new_comment: ""
+                        new_comment: '',
                       });
                       addComment(
                         this.state.new_comment,
@@ -88,14 +88,14 @@ class Product extends Component {
                       );
                     }}
                   >
-                    <SendIcon name="send" size={24}/>
+                    <SendIcon name="send" size={24} />
                   </SendButton>
                 </ChatBar>
                 {this.props.comments.map((comment, i) => (
                   <Comment
                     name={comment.Benutzername}
                     abteilung={comment.Abteilung}
-                    date={moment(comment.Timestamp).format("DD.MM.YYYY HH:mm")}
+                    date={moment(comment.Timestamp).format('DD.MM.YYYY HH:mm')}
                     text={comment.Comment}
                     replies={[]}
                     key={i}
@@ -112,7 +112,7 @@ class Product extends Component {
 
 const mapStateToProps = state => ({
   scan_result: state.scanner.scan_result,
-  comments: state.scanner.comments
+  comments: state.scanner.comments,
 });
 
 const ProductWithRedux = connect(

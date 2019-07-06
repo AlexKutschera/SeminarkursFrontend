@@ -61,10 +61,10 @@ class Comment extends Component {
           {this.props.text}
           {/* TODO Mehr anzeigen Knopf Comment Text */}
         </CommentText>
-        {/*<ReplyButton>
+        {/* <ReplyButton>
           <ReplyButtonText>Antworten</ReplyButtonText>
-        </ReplyButton>*/}
-        {/*{repliesRow}*/}
+        </ReplyButton> */}
+        {/* {repliesRow} */}
         {/* <Wrapper>
           <CommentHead>
             <CommentAvatar source={require('../../assets/Avatar.jpg')} />

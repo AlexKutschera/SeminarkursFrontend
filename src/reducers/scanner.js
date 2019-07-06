@@ -2,12 +2,12 @@
  * Copyright (c) 2019
  */
 
-import { HIDE_RESULT, LOAD_COMMENTS, SCAN_DATA } from "../actions/scanner";
+import { HIDE_RESULT, LOAD_COMMENTS, LOAD_DATA, SCAN_DATA } from "../actions/scanner";
 
 const initialState = {
   scan_result: null,
   show_result: false,
-  comments: []
+  comments: [],
 };
 
 export default (state = initialState, action) => {
@@ -17,7 +17,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         scan_result: action.payload,
-        show_result: true
+        show_result: true,
+      };
+    }
+    case LOAD_DATA: {
+      return {
+        ...state,
+        scan_result: action.payload,
       };
     }
     case HIDE_RESULT: {
@@ -25,13 +31,13 @@ export default (state = initialState, action) => {
         ...state,
         show_result: false,
         scan_result: null,
-        comments: []
+        comments: [],
       };
     }
     case LOAD_COMMENTS: {
       return {
         ...state,
-        comments: action.payload
+        comments: action.payload,
       };
     }
     default: {

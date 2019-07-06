@@ -9,8 +9,8 @@ import styled from "styled-components";
 import Icon from "react-native-ionicons";
 import { Dimensions } from "react-native";
 import { withNavigationFocus } from "react-navigation";
-import { ProductSheet } from "../Components";
 import { connect } from "react-redux";
+import { ProductSheet } from "../Components";
 import { loadScannerData } from "../actions/scanner";
 
 // TODO Flashmode Button
@@ -19,7 +19,7 @@ type Props = {};
 
 class Scanner extends Component<Props> {
   static navigationOptions = {
-    title: "Scanner"
+    title: 'Scanner',
   };
 
   socket = null;
@@ -29,7 +29,7 @@ class Scanner extends Component<Props> {
     this.handleIsRead = this.handleIsRead.bind(this);
     this.state = {
       code: null,
-      flash: false
+      flash: false,
     };
   }
 
@@ -42,18 +42,18 @@ class Scanner extends Component<Props> {
   componentDidUpdate() {
     if (!this.props.show_result && this.state.code !== null) {
       this.setState({
-        code: null
+        code: null,
       });
     }
   }
 
   _showSuche = () => {
-    this.props.navigation.navigate("Suche");
+    this.props.navigation.navigate('Suche');
   };
 
   _toggleFlash = () => {
     this.setState({
-      flash: !this.state.flash
+      flash: !this.state.flash,
     });
     console.log(this.state.flash);
   };
@@ -67,7 +67,7 @@ class Scanner extends Component<Props> {
     if (code !== this.state.code) {
       loadScannerData(code);
       this.setState({
-        code: code
+        code,
       });
     }
   }
@@ -86,7 +86,7 @@ class Scanner extends Component<Props> {
               this.camera = ref;
             }}
             style={{
-              flex: 1
+              flex: 1,
             }}
             onBarCodeRead={data => this.loadItemData(data.data)}
             captureAudio={false}
@@ -94,35 +94,47 @@ class Scanner extends Component<Props> {
         )}
         <Toolbar>
           <SearchButton onPress={this._showSuche}>
-            <StyledIcon name="search"/>
+            <StyledIcon name="search" />
           </SearchButton>
-          <Text>{this.props.is_online ? "Verbunden" : "Nicht verbunden"} | {(this.props.session_id === null ||
+          <Text>
+            {this.props.is_online ? 'Verbunden' : 'Nicht verbunden'} |{' '}
+            {this.props.session_id === null ||
             this.props.session_id === undefined ||
-            this.props.session_id === "") ? "Nicht angemeldet" : "Angemeldet"}</Text>
+            this.props.session_id === ''
+              ? 'Nicht angemeldet'
+              : 'Angemeldet'}
+          </Text>
           <SearchButton onPress={this._toggleFlash}>
-            {this.state.flash ? <StyledIcon name="flash"/> : <StyledIcon name="flash-off"/>}
+            {this.state.flash ? (
+              <StyledIcon name="flash" />
+            ) : (
+              <StyledIcon name="flash-off" />
+            )}
           </SearchButton>
         </Toolbar>
-        {this.props.show_result && <Popup handleIsRead={this.handleIsRead}/>}
+        {this.props.show_result && <Popup handleIsRead={this.handleIsRead} />}
       </Container>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   show_result: state.scanner.show_result,
   scan_result: state.scanner.scan_result,
   is_online: state.state.is_online,
-  session_id: state.user.session_id
+  session_id: state.user.session_id,
 });
 
 const ScannerWithNavigationFocus = withNavigationFocus(Scanner);
-const ScannerWithRedux = connect(mapStateToProps, {})(ScannerWithNavigationFocus);
+const ScannerWithRedux = connect(
+  mapStateToProps,
+  {}
+)(ScannerWithNavigationFocus);
 
 export { ScannerWithRedux as Scanner };
 
 const Popup = styled(ProductSheet)`
-  width: ${Dimensions.get("window").width};
+  width: ${Dimensions.get('window').width};
   position: absolute;
   left: 0;
   bottom: 0;
@@ -130,7 +142,7 @@ const Popup = styled(ProductSheet)`
   height: 200;
 `;
 const Toolbar = styled.View`
-  width: ${Dimensions.get("window").width};
+  width: ${Dimensions.get('window').width};
   position: absolute;
   left: 0;
   top: 32;

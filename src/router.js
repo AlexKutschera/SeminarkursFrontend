@@ -29,7 +29,7 @@ const TabNavigator = createBottomTabNavigator(
         tabBarOnPress: props => {
           hideResult();
           props.defaultHandler();
-        }
+        },
       }),
     },
     Chat: {
@@ -63,7 +63,7 @@ export const AppNavigator = createStackNavigator(
     Suche,
     Product,
     TabNavigator,
-    Datenblatt
+    Datenblatt,
   },
   { initialRouteName: 'TabNavigator', headerMode: 'none' }
 );

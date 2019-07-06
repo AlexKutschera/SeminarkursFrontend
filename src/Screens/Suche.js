@@ -8,8 +8,12 @@ import Icon from "react-native-ionicons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { connect } from "react-redux";
+import moment from "moment";
 import color from "../Styles/Color";
 import { SearchResults } from "../Components/SearchResult";
+import { LOAD_DATA } from "../actions/scanner";
+import Socket from "../util/Socket";
+import { store } from "../App";
 
 //  TODO Suchscreen Innenleben
 
@@ -19,16 +23,25 @@ class Suche extends Component {
   };
 
   state = {
-    search: ""
+    search: '',
+    last_update: moment(),
   };
 
-  _showProduct = articleID => () => {
+  _showProduct = article => () => {
+    store.dispatch({
+      type: LOAD_DATA,
+      payload: article,
+    });
     this.props.navigation.navigate('Product');
   };
 
   _searchProducts = data => {
+    Socket.getSocket().emit('artikel.search', {
+      session_id: store.getState().user.session_id,
+      condition: data,
+    });
     this.setState({
-      search: data
+      search: data,
     });
   };
 
@@ -55,8 +68,8 @@ class Suche extends Component {
           {this.props.search_articles.map((article, i) => (
             <TouchableOpacity onPress={this._showProduct(article)} key={i}>
               <SearchResults
-                title="Endrohr"
-                image={require("../../assets/Endrohr.jpg")}
+                title={article.Art_Bez}
+                image={require('../../assets/Endrohr.jpg')}
               />
             </TouchableOpacity>
           ))}
@@ -67,7 +80,7 @@ class Suche extends Component {
 }
 
 const mapStateToProps = state => ({
-  search_articles: state.search.articles
+  search_articles: state.search.articles,
 });
 
 const SucheWithRedux = connect(

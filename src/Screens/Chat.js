@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { TextInput, View, Text } from 'react-native';
-import { Container, Content, Button } from 'native-base';
-import styled from 'styled-components';
-import Icon from 'react-native-ionicons';
-import { Dimensions } from 'react-native';
-import color from '../Styles/Color';
-import { DefaultHeader } from '../Components';
+import React, { Component } from "react";
+import { Dimensions } from "react-native";
+import { Button, Container, Content } from "native-base";
+import styled from "styled-components";
+import Icon from "react-native-ionicons";
+
+import color from "../Styles/Color";
+import { DefaultHeader } from "../Components";
 
 const { width, height } = Dimensions.get('window');
 class Chat extends Component {

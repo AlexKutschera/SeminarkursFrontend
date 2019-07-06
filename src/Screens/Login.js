@@ -13,8 +13,8 @@ class Login extends Component {
   };
 
   state = {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   };
 
   _signInAsync = async () => {
@@ -79,7 +79,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  session_id: state.user.session_id
+  session_id: state.user.session_id,
 });
 
 const LoginWithRedux = connect(

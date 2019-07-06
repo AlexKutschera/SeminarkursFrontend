@@ -40,13 +40,13 @@ class ProductSheet extends Component {
         handleIsRead={hideResult}
       />
     ) : (
-      <View/>
+      <View />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  scan_result: state.scanner.scan_result
+  scan_result: state.scanner.scan_result,
 });
 
 const ProductSheetWithRedux = connect(

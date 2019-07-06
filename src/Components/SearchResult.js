@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { TouchableOpacity } from 'react-native';
-import color from '../Styles/Color';
+import React, { Component } from "react";
+import styled from "styled-components";
+import color from "../Styles/Color";
 
 class SearchResults extends Component {
   render() {
@@ -11,6 +10,7 @@ class SearchResults extends Component {
           <ProductImage source={this.props.image} />
           <ProductTitle>{this.props.title}</ProductTitle>
         </ProductHeader>
+        {/*
         <ProductTable>
           <TableGroup>
             <TableHeading>Gruppe</TableHeading>
@@ -24,7 +24,7 @@ class SearchResults extends Component {
             <TableHeading>Reihe</TableHeading>
             <TableData>8888</TableData>
           </TableGroup>
-        </ProductTable>
+        </ProductTable> */}
       </Container>
     );
   }
