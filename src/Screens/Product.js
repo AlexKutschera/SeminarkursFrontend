@@ -2,15 +2,18 @@
  * Copyright (c) 2019
  */
 
-import React, { Component } from "react";
-import styled from "styled-components";
-import Icon from "react-native-ionicons";
-import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { connect } from "react-redux";
-import moment from "moment";
-import color from "../Styles/Color";
-import { Comment, ProductCard } from "../Components";
-import { addComment } from "../actions/scanner";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Icon from 'react-native-ionicons';
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import color from '../Styles/Color';
+import { Comment, ProductCard } from '../Components';
+import { addComment } from '../actions/scanner';
 
 class Product extends Component {
   static navigationOptions = {
@@ -156,15 +159,17 @@ const CommentCount = styled.Text`
 `;
 const ChatBar = styled.View`
   background-color: ${color.white};
-  margin-top: 12;
-  margin-bottom: 8;
+  border-color: ${color.gray08};
+  border-width: 1;
+  margin-bottom: 40;
+  margin-left: 20;
+  margin-right: 20;
   border-radius: 26;
-  max-height: 50;
-  flex: 1;
+  height: auto;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  elevation: 1;
+  align-items: flex-end;
+  elevation: 2;
 `;
 const Avatar = styled.Image`
   width: 32;
@@ -173,15 +178,16 @@ const Avatar = styled.Image`
   border-width: 1;
   border-color: rgba(0, 0, 0, 0.2);
   margin-left: 9;
+  margin-bottom: 9;
 `;
 const SendButton = styled.TouchableOpacity`
   elevation: 0;
   background-color: ${color.blue03};
-  align-self: stretch;
-  border-top-right-radius: 26px;
-  border-bottom-right-radius: 26px;
-  max-width: 50;
-  height: 48;
+  border-top-right-radius: 26;
+  border-bottom-right-radius: 26;
+  max-width: 48;
+  align-self: flex-end;
+  height: 100%;
   flex: 1;
   flex-direction: row;
   align-items: center;

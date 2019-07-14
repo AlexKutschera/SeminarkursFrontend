@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Dimensions } from "react-native";
-import { Button, Container, Content } from "native-base";
-import styled from "styled-components";
-import Icon from "react-native-ionicons";
+import React, { Component } from 'react';
+import { Dimensions } from 'react-native';
+import { Button, Container, Content } from 'native-base';
+import styled from 'styled-components';
+import Icon from 'react-native-ionicons';
 
-import color from "../Styles/Color";
-import { DefaultHeader } from "../Components";
+import color from '../Styles/Color';
+import { DefaultHeader } from '../Components';
 
 const { width, height } = Dimensions.get('window');
 class Chat extends Component {
@@ -30,7 +30,12 @@ class Chat extends Component {
         </ChatContent>
         <ChatBar>
           <Avatar source={require('../../assets/Avatar.jpg')} />
-          <MessageInput placeholder="Nachricht eingeben" />
+          <MessageInput
+            placeholder="Nachricht eingeben"
+            autogrow
+            multiline
+            scrollEnabled
+          />
           <SendButton iconLeft>
             <SendIcon name="send" size={24} />
           </SendButton>
@@ -53,11 +58,10 @@ const ChatBar = styled.View`
   margin-left: 20;
   margin-right: 20;
   border-radius: 26;
-  max-height: 50;
-  flex: 1;
+  height: auto;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   elevation: 2;
 `;
 const Avatar = styled.Image`
@@ -67,15 +71,16 @@ const Avatar = styled.Image`
   border-width: 1;
   border-color: rgba(0, 0, 0, 0.2);
   margin-left: 9;
+  margin-bottom: 9;
 `;
 const SendButton = styled(Button)`
   elevation: 0;
   background-color: ${color.blue03};
-  align-self: stretch;
-  border-top-right-radius: 26px;
-  border-bottom-right-radius: 26px;
-  max-width: 50;
-  height: 48;
+  border-top-right-radius: 26;
+  border-bottom-right-radius: 26;
+  max-width: 48;
+  align-self: flex-end;
+  height: 100%;
   flex: 1;
   flex-direction: row;
   align-items: center;
@@ -88,6 +93,9 @@ const MessageInput = styled.TextInput`
   font-size: 16;
   margin-right: auto;
   margin-left: 8;
+  max-height: 100;
+  min-height: 50;
+  flex: 1;
 `;
 const MessageSend = styled.View`
   border-top-left-radius: 16;
